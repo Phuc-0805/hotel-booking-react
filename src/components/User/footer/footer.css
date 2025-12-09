@@ -1,0 +1,158 @@
+/* ----------------------------------- */
+/* CSS Footer (Bố cục 1:1:1 và Tinh chỉnh) */
+/* ----------------------------------- */
+
+.footer-section{
+    background-color: #050c2a;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; 
+    gap: 40px; /* Khoảng cách giữa các cột */
+    text-align: left;
+    padding: 0 15px; /* THÊM PHẦN RÌA (PADDING) cho container */
+}
+
+.footer-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    color: white;
+    padding-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #e04444;
+}
+
+/* CỘT 1: CONTACT US (CHIA 1 PHẦN) */
+.contact-column {
+    flex: 1; /* ĐÃ CHUYỂN TỪ flex: 2 SANG flex: 1 */
+    min-width: 250px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1em;
+    color: #ccc;
+}
+
+.contact-item i, .contact-item img {
+    margin-right: 15px;
+    color: #e04444;
+    font-size: 1.2em;
+}
+
+/* CỘT 2: MENU LINK (CHIA 1 PHẦN) */
+.menu-column {
+    flex: 1; /* ĐÃ GIỮ flex: 1 */
+    min-width: 150px;
+    /* THÊM PHẦN RÌA: Đảm bảo có khoảng cách an toàn nếu không dùng gap */
+    padding-left: 10px; 
+}
+.menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.menu-column li {
+    margin-bottom: 10px;
+}
+.menu-column a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s;
+}
+.menu-column a:hover {
+    color: #fff;
+}
+
+/* CỘT 3: NEWSLETTER (CHIA 1 PHẦN) */
+.newsletter-column {
+    flex: 1; /* ĐÃ CHUYỂN TỪ flex: 2 SANG flex: 1 */
+    min-width: 250px;
+}
+
+.newsletter-form input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 1em;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.newsletter-form button {
+    background-color: #e04444;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.newsletter-form button:hover {
+    background-color: #c93535;
+}
+
+/* ICON MẠNG XÃ HỘI */
+.social-icons {
+    margin-top: 20px;
+}
+.social-icons a {
+    color: #fff;
+    font-size: 1.4em;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+.social-icons a:hover {
+    color: #e04444;
+}
+
+/* ----------------------------------- */
+/* Responsive Design cho Footer */
+/* ----------------------------------- */
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    .footer-section h3 {
+        display: block; 
+        text-align: center;
+    }
+
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .contact-item {
+        justify-content: center; 
+    }
+}

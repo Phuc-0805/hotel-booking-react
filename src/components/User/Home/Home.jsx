@@ -11,6 +11,9 @@ import Gallery from './Gallery/gallery.jsx';
 
 import Blogs from './Blogs/blogs.jsx';
 
+import ContactUs from './contactus/contactus.jsx';
+
+import Footer from '../footer/footer.jsx';
 export default function Home() {
     return (
         <div className="home-container">
@@ -26,6 +29,9 @@ export default function Home() {
 
         <Blogs />
 
+        <ContactUs />
+
+        <Footer />
         </div>
     );
 }

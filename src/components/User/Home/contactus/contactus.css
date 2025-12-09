@@ -1,0 +1,183 @@
+/* ----------------------------------- */
+/* CSS cho Contact Section (Tiếp theo) */
+/* ----------------------------------- */
+
+/* KIỂU CHO TIÊU ĐỀ */
+#contact-section {
+  padding: 100px 20px;
+  background-color: #f9f9f9;
+  display: flex;             /* bật flex cho toàn section */
+  flex-direction: column;    /* xếp nội dung theo chiều dọc */
+  align-items: center;       /* căn giữa theo chiều ngang */
+}
+
+
+.contact-header {
+    /* Đã định nghĩa max-width, margin, text-align ở trên */
+    padding-bottom: 40px;
+}
+
+.contact-header h2 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #333; /* Màu đen hoặc xám đậm */
+    letter-spacing: 2px;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+}
+
+/* Thêm gạch chân đỏ bên phải chữ 'CONTACT US' */
+
+/* CONTAINER CHO FORM VÀ MAP (Bố cục 2 cột) */
+.contact-container {
+    /* Thiết lập lại max-width để phù hợp với bố cục 2 cột, ví dụ 1000px */
+    max-width: 1400px;
+    min-width: 1000px;
+    display: flex; /* Bật Flexbox */
+    gap: 40px; /* Khoảng cách giữa form và map */
+    text-align: left; /* Đặt lại căn lề cho nội dung bên trong */
+}
+
+/* CỘT FORM (Bên trái) */
+.contact-form-column {
+    flex: 1; /* Chiếm phần bằng nhau hoặc có thể cố định hơn */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kiểu chung cho các nhóm input (Name, Email, Phone Number) */
+.form-group {
+    margin-bottom: 25px;
+}
+
+/* Kiểu cho Input và Textarea */
+.form-control {
+    width: 100%;
+    padding: 12px 0; /* Padding trên/dưới để tạo khoảng trống cho đường viền */
+    border: none;
+    border-bottom: 1px solid #ccc; /* Đường viền dưới mỏng */
+    font-size: 1em;
+    outline: none; /* Bỏ viền mặc định khi focus */
+    color: #333;
+    transition: border-bottom-color 0.3s;
+}
+
+/* Hiệu ứng khi focus */
+.form-control:focus {
+    border-bottom-color: #e04444; /* Đổi màu khi focus */
+}
+
+/* Input Placeholder (Dòng chữ Name, Email,...) */
+.form-control::placeholder {
+    color: #999;
+    font-size: 1em;
+}
+
+/* Kiểu đặc biệt cho Textarea */
+textarea.form-control {
+    resize: none; /* Không cho phép kéo giãn textarea */
+    height: 100px; /* Chiều cao cố định */
+}
+
+/* NÚT GỬI (SEND Button) */
+.send-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 150px; /* Chiều rộng cố định cho nút */
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.send-button:hover {
+    background-color: #333;
+}
+
+/* CỘT MAP (Bên phải) */
+/* ----------------------------------- */
+/* CSS BỔ SUNG CHO KHỐI MAP INFO */
+/* ----------------------------------- */
+
+.contact-map-column {
+    position: relative;
+    display: flex;
+    flex: 1; /* Quan trọng để map-info-block nằm nổi bên trong */
+}
+
+.map-info-block {
+    position: absolute;
+    top: 15px; /* Khoảng cách từ trên xuống */
+    left: 15px; /* Khoảng cách từ trái sang */
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Đổ bóng nhẹ */
+    max-width: 80%;
+    z-index: 10; /* Đảm bảo nó nổi trên iframe */
+}
+
+.map-info-block h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.map-address {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.map-rating-row {
+    font-size: 0.85em;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.map-rating-value {
+    color: orange; /* Mô phỏng màu sao */
+    margin-right: 5px;
+}
+
+.map-reviews {
+    color: #1a73e8; /* Màu xanh lam của Google */
+    margin-right: 10px;
+}
+
+.map-link {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.directions-link {
+    /* Tạo khoảng cách cho nút Directions */
+    margin-left: 5px; 
+}
+
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column; /* Đổi thành bố cục 1 cột trên màn hình nhỏ */
+        gap: 30px;
+    }
+
+    .contact-map-column {
+        height: 300px; /* Giảm chiều cao map trên di động */
+    }
+
+    .contact-header,
+    .contact-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
