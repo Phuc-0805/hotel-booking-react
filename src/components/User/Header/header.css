@@ -1,0 +1,66 @@
+.header {
+    width: 100%;
+    padding: 20px 60px;
+    max-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* LOGO */
+.logo {
+    max-width: 150px;
+}
+
+.logo img {
+    width: 100%;
+    display: block;
+}
+
+/* MENU */
+.mucluc {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.mucluc a {
+    color: var(--text-color);
+    font-size: 17px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Hover màu primary */
+.mucluc a:hover {
+    color: var(--primary);
+}
+
+/* Hiệu ứng gạch chân */
+.mucluc a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    height: 3px;
+    background-color: var(--primary);
+    bottom: 0;
+    border-radius: 10px;
+    transform: translateX(-50%) scaleX(0);
+    transition: 0.25s;
+}
+
+.mucluc a:hover::after,
+.mucluc a.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.mucluc a.active {
+    color: var(--primary);
+}
