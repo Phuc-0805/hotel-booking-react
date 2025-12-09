@@ -1,0 +1,84 @@
+/* ----------------------------------- */
+/* CSS cho Gallery Section */
+/* ----------------------------------- */
+
+#gallery-section {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    background-color: #ffffff; /* Đảm bảo nền trắng */
+}
+
+/* Kiểu cho phần tiêu đề */
+.gallery-header {
+    text-align: center;
+    /* Padding đã được điều chỉnh để không có gạch chân */
+    padding: 40px 20px 20px; 
+}
+
+.gallery-header h2 {
+    font-size: 2.7em;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin: 0;
+}
+
+/* Kiểu cho bố cục gallery */
+.gallery-container {
+    max-width: 1200px; /* Chiều rộng tối đa của container */
+    margin: 0 auto; /* Căn giữa container */
+    padding: 0 15px 50px;
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng */
+    justify-content: center; /* Căn giữa các mục ảnh */
+}
+
+/* Kiểu cho từng mục ảnh */
+.gallery-item {
+    /* 4 ảnh trên một hàng (25% mỗi ảnh) trừ đi lề (20px) */
+    width: calc(25% - 20px); 
+    margin: 10px; /* Khoảng cách giữa các ảnh */
+    box-sizing: border-box; /* Đảm bảo padding/border không làm tăng kích thước tổng thể */
+    overflow: hidden; /* Ẩn bất cứ thứ gì tràn ra ngoài, quan trọng cho hiệu ứng zoom */
+    border-radius: 4px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px; /* Chiều cao cố định cho tất cả ảnh */
+    object-fit: cover; /* Cắt ảnh để vừa với kích thước */
+    display: block;
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+}
+
+/* Hiệu ứng phóng to khi di chuột */
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* ----------------------------------- */
+/* Responsive Design (Thiết kế đáp ứng) */
+/* ----------------------------------- */
+
+/* Màn hình nhỏ hơn 1024px (ví dụ: máy tính bảng) */
+@media (max-width: 1024px) {
+    .gallery-item {
+        width: calc(33.333% - 20px); /* 3 ảnh trên một hàng */
+    }
+}
+
+/* Màn hình nhỏ hơn 768px (ví dụ: máy tính bảng dọc) */
+@media (max-width: 768px) {
+    .gallery-item {
+        width: calc(50% - 20px); /* 2 ảnh trên một hàng */
+    }
+}
+
+/* Màn hình nhỏ hơn 480px (ví dụ: điện thoại) */
+@media (max-width: 480px) {
+    .gallery-item {
+        width: calc(100% - 20px); /* 1 ảnh trên một hàng */
+    }
+}

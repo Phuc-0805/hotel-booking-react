@@ -1,6 +1,6 @@
 import "./header.css";
 import { NavLink } from "react-router-dom";
-import logo from "../../../assets/Gemini_Generated_Image_f2fkicf2fkicf2fk-removebg-preview.png";
+import logo from "../../../assets/Logo.png";
 
 export default function Header() {
   return (

@@ -5,7 +5,7 @@ import Aboutus from './Aboutus/Aboutus.jsx';
 
 import Carousel from './Carousel/carousel.jsx';
 import Room from './Room/room.jsx';
-
+import Gallery from './Gallery/gallery.jsx';
 
 export default function Home() {
     return (
@@ -17,7 +17,8 @@ export default function Home() {
         <Aboutus />
 
         <Room />
-
+        
+        <Gallery />
         </div>
     );
 }

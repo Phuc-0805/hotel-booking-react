@@ -1,9 +1,9 @@
 import "./room.css";
 import "../../Header/header.css";
-import img1 from "../../../../assets/Mai-Son-Du-Roi_12805.jpg";
+import img1 from "../../../../assets/tongquan.jpg";
 import img2 from "../../../../assets/Copy-of-Deluxe-Twins.jpg";
 import img3 from "../../../../assets/Copy-of-Le317Bistro-07.202010091-HDR-1.jpg";
-import img4 from "../../../../assets/Mai-Son-Du-Roi_12805.jpg";
+import img4 from "../../../../assets/tongquan.jpg";
 import img5 from "../../../../assets/Copy-of-Deluxe-Twins.jpg";
 import img6 from "../../../../assets/Copy-of-Le317Bistro-07.202010091-HDR-1.jpg";
 
