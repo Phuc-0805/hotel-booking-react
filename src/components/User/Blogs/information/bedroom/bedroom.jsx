@@ -1,6 +1,6 @@
 import React from 'react';
-import "./bedroom.css";
 
+import "../pop.css";
 const Modal = ({ isOpen, onClose, content }) => {
 
     if (!isOpen) return null;
@@ -11,9 +11,7 @@ const Modal = ({ isOpen, onClose, content }) => {
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
 
                 {/* Nút đóng */}
-                <button className="modal-close-btn" onClick={onClose}>
-                    &times;
-                </button>
+                
 
                 {/* Title */}
                 <h2 className="modal-title">{content.title}</h2>
@@ -55,6 +53,9 @@ const Modal = ({ isOpen, onClose, content }) => {
                     </p>
 
                 </div>
+                <button className="modal-close-btn" onClick={onClose}>
+                    Đóng
+                </button>
             </div>
         </div>
     );

@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/User/Home/Home.jsx";
 import Blog from "./components/User/Blogs/Blog.jsx";
-import Bedroom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
+
+import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
+import Restaurant from "./components/User/Blogs/information/Restaurant/restaurant.jsx";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,21 +16,38 @@ function App() {
     setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalContent(null);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route 
           path="/blogs" 
           element={<Blog openModal={openModal} />} 
         />
       </Routes>
 
-      <Bedroom 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        content={modalContent}
-      />
+      {/* ---- MODAL SWITCH ---- */}
+      {modalContent?.type === "BedRoom" && (
+        <BedRoom
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      )}
+
+      {modalContent?.type === "Restaurant" && (
+        <Restaurant
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      )}
     </BrowserRouter>
   );
 }

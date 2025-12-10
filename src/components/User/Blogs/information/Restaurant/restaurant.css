@@ -1,0 +1,119 @@
+/* ========== GRID + CARD ========== */
+.restaurant-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto;
+}
+
+.restaurant-title {
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 35px;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.restaurant-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.restaurant-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.restaurant-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.restaurant-btn {
+    width: 80%;
+    margin: 15px auto 20px auto;
+    padding: 10px 15px;
+    background: #c51d0d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.restaurant-btn:hover {
+    background: #9e1609;
+}
+
+/* ========== MODAL ========== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-box {
+    width: 580px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    animation: show 0.25s ease;
+}
+
+@keyframes show {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.modal-img {
+    width: 100%;
+    height: 260px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.modal-title {
+    margin: 15px 0 10px;
+    font-size: 26px;
+    text-align: center;
+}
+
+.modal-desc {
+    text-align: center;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.modal-close {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background: #c51d0d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #9e1609;
+}
