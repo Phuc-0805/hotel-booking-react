@@ -4,9 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/User/Home/Home.jsx";
 import Blog from "./components/User/Blogs/Blog.jsx";
 import Contactus from "./components/User/Contactus/contact.jsx";
+
 import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
 import Restaurant from "./components/User/Blogs/information/Restaurant/restaurant.jsx";
+import HotelLobby from "./components/User/Blogs/information/HotelLobby/hotellobby.jsx";
+
 import Gallery from "./components/User/Gallerys/gallerys.jsx";
+import ROOM from "./components/User/Rooms/rooms.jsx";
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -32,6 +36,7 @@ function App() {
         />
         <Route path="/contactus" element={<Contactus />} />
         <Route path="/gallerys" element={<Gallery />} />
+        <Route path="/rooms" element={<ROOM />} />
       </Routes>
 
       {/* ---- MODAL SWITCH ---- */}
@@ -45,6 +50,13 @@ function App() {
 
       {modalContent?.type === "Restaurant" && (
         <Restaurant
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      )}
+      {modalContent?.type === "HotelLobby" && (
+        <HotelLobby
           isOpen={isModalOpen}
           onClose={closeModal}
           content={modalContent}
