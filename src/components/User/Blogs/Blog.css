@@ -1,6 +1,21 @@
+.Blog-header{
+    font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    max-height: 100px;
+    margin-top: 0;
+    width: 100%;
+    align-items: center;
+    background-color: rgb(5, 5, 37);
+    border: 1px solid black;
+}
+.Blog-header h1{
+    font-size: 2.8em;
+    color: #fff;
+    margin-bottom: 10px;
+    text-align: center;
+}
 /* ----------------------------------- */
 /* Blogs Section */
-#blogs-section {
+#Blogs-section {
   position: relative;
   padding: 120px 20px; /* Tăng padding trên để section cao hơn */
   min-height: 600px; /* Chiều cao tối thiểu */
@@ -12,15 +27,15 @@
   font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
-.blogs-overlay {
+.Blogs-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.5); /* overlay tối */
   z-index: 1;
 }
 
-.blogs-header,
-.blogs-container {
+.Blogs-header,
+.Blogs-container {
   position: relative;
   z-index: 2;
   max-width: 1200px;
@@ -28,20 +43,20 @@
   text-align: center; /* căn giữa toàn bộ nội dung header */
 }
 
-.blogs-header h2 {
+.Blogs-header h2 {
   font-size: 3em; /* tăng kích thước chữ */
   color: #fff; /* chữ trắng */
   margin-bottom: 10px;
 }
 
-.blogs-header p {
+.Blogs-header p {
   color: #bddff8; /* phụ đề màu xanh lam */
   font-size: 1.2em;
   margin-top: 0;
 }
 
 /* Các card blog và container vẫn giữ như cũ */
-.blogs-container {
+.Blogs-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -49,7 +64,7 @@
   margin-top: 40px;
 }
 
-.blog-card {
+.Blog-card {
   width: calc(33.333% - 20px);
   background-color: rgba(255, 255, 255, 0.9);
   color: #333;
@@ -59,47 +74,62 @@
   transition: transform 0.3s ease;
 }
 
-.blog-card:hover {
+.Blog-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.blog-image img {
+.Blog-image img {
   width: 100%;
   height: 250px;
   object-fit: cover;
 }
 
-.blog-content {
+.Blog-content {
   padding: 20px;
 }
 
-.blog-content h3 {
+.Blog-content h3 {
   font-size: 1.5em;
   margin: 0 0 5px;
 }
 
-.blog-content p.subtitle {
+.Blog-content p.subtitle {
   color: #e04444;
   font-weight: bold;
   margin: 0 0 15px;
 }
 
-.blog-content p.description {
+.Blog-content p.description {
   font-size: 0.9em;
   line-height: 1.6;
   margin: 0;
 }
+.read-more-btn {
+    display: inline-block; /* Để có thể thiết lập padding và margin */
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #e04444; /* Màu đỏ nổi bật (tương tự màu subtitle) */
+    color: #fff;
+    text-decoration: none; /* Bỏ gạch chân */
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.read-more-btn:hover {
+    background-color: #c43838; /* Màu đậm hơn khi di chuột */
+}
 
 /* Responsive */
 @media(max-width: 1024px){
-  .blog-card {
+  .Blog-card {
     width: calc(50% - 20px);
   }
 }
 
 @media(max-width: 768px){
-  .blog-card {
+  .Blog-card {
     width: 100%;
   }
 }
