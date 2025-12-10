@@ -37,7 +37,8 @@
 /* Kiểu cho từng mục ảnh */
 .gallery-item {
     /* 4 ảnh trên một hàng (25% mỗi ảnh) trừ đi lề (20px) */
-    width: calc(25% - 20px); 
+    /* width: calc(25% - 20px);  */
+    flex: 1 1 20%; /* Sử dụng flexbox để kiểm soát kích thước */
     margin: 10px; /* Khoảng cách giữa các ảnh */
     box-sizing: border-box; /* Đảm bảo padding/border không làm tăng kích thước tổng thể */
     overflow: hidden; /* Ẩn bất cứ thứ gì tràn ra ngoài, quan trọng cho hiệu ứng zoom */
