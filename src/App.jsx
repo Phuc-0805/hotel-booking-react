@@ -1,24 +1,34 @@
-// src/App.jsx
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from "./components/User/Home/Home.jsx"; 
-import Blog from "./components/User/Blogs/Blog.jsx"; 
-
+import Home from "./components/User/Home/Home.jsx";
+import Blog from "./components/User/Blogs/Blog.jsx";
+import Bedroom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const openModal = (data) => {
+    setModalContent(data);
+    setIsModalOpen(true);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
-        
-        {/* BẮT BUỘC: Hiển thị Home khi URL là "/" */}
         <Route path="/" element={<Home />} />
-        
-        {/* BẮT BUỘC: Hiển thị Blog khi URL là "/blogs" */}
-        <Route path="/blogs" element={<Blog />} />
-        
-        {/* Các Route cho Services, Gallery, Booking, v.v. cần được thêm nếu muốn các liên kết đó hoạt động */}
-        
+        <Route 
+          path="/blogs" 
+          element={<Blog openModal={openModal} />} 
+        />
       </Routes>
+
+      <Bedroom 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        content={modalContent}
+      />
     </BrowserRouter>
   );
 }

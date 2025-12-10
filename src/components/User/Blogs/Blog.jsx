@@ -1,12 +1,17 @@
 import Header from "../Header/header.jsx";
-import "./Blog.css"; // Đã sửa tên file CSS thành "Blog.css" để đồng bộ với Blog.jsx
-import React from 'react'; // Cần import React để dùng JSX
+import Footer from "../footer/footer.jsx";
+import "./Blog.css";
+import React from 'react'; 
 import img1 from "../../../assets/Noithat.jpg"; 
 import img2 from "../../../assets/LE-GRENIER_13490-1.jpg";
 import img3 from "../../../assets/khachsan.jpg";
+import img4 from "../../../assets/message.jpg.webp";
+import img5 from "../../../assets/event.jpg";
+import img6 from "../../../assets/History.png";
 
-// Dữ liệu mẫu cho các thẻ blog (Đã đưa vào component)
-const blogPosts = [
+export default function Blog({ openModal }) {
+
+   const blogPosts = [
     { 
         id: 1, 
         imageSrc: img1,
@@ -28,44 +33,60 @@ const blogPosts = [
         subtitle: "Sảnh đón khách sang trọng", 
         description: "Sảnh khách sạn rộng rãi, thiết kế tinh tế,không khí ấm cúng, tạo ấn tượng đầu tiên khó quên cho khách hàng." 
     },
-];
-
-export default function Blog() {
+    { 
+        id: 4, 
+        imageSrc: img4,
+        title: "Services", 
+        subtitle: "Dich vụ hoàn hảo", 
+        description: "Dịch vụ chuyên nghiệp,đầy đủ, tiện nghi, tận tâm, luôn sẵn sàng hỗ trợ khách hàng 24/7."
+    },
+    { 
+        id: 5, 
+        imageSrc: img5,
+        title: "Events", 
+        subtitle: "Sự kiện đặc sắc", 
+        description: "Tổ chức sự kiện độc đáo, sáng tạo, sôi động, mang đến trải nghiệm khó quên cho khách hàng."
+    },
+    { 
+        id: 6, 
+        imageSrc: img6,
+        title: "History", 
+        subtitle: "Truyền thống lâu đời", 
+        description: "Khách sạn với lịch sử phát triển lâu đời, mang đậm giá trị văn hóa và truyền thống."
+    }
+    ];
     return (
         <>
-            <Header /> {/* Giữ lại component Header */}
+            <Header />
+
             <div className="Blog-header"> 
-                <h1>BLOG</h1>
+                <h1>BLOG</h1> 
             </div>
-            {/* 💡 Sửa: Sử dụng id và class name đã thống nhất trong các bước trước */}
-            <section id="Blogs-section">   
-                {/* Thêm overlay nếu bạn muốn làm tối ảnh nền */}
-                {/* Phần container chứa các card blog */}
+                
+            <section id="Blogs-section">
                 <div className="Blogs-container">
                     {blogPosts.map(post => (
                         <div key={post.id} className="Blog-card">
-                            
+
                             <div className="Blog-image">
-                                <img 
-                                    src={post.imageSrc} 
-                                    alt={post.title} 
-                                />
+                                <img src={post.imageSrc} alt={post.title} />
                             </div>
-                            
+
                             <div className="Blog-content">
                                 <h3>{post.title}</h3>
                                 <p className="subtitle">{post.subtitle}</p>
                                 <p className="description">{post.description}</p>
-                                
-                                {/* Nút Xem Chi Tiết đã thêm ở bước trước */}
-                                <a href={`/blog/${post.id}`} className="read-more-btn">
+
+                                <button onClick={() => openModal(post)}>
                                     Xem chi tiết
-                                </a>
+                                </button>
                             </div>
                         </div>
                     ))}
                 </div>
             </section>
+
+            <Footer />
         </>
     );
 }

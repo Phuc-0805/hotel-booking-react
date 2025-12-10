@@ -17,15 +17,13 @@ const Footer = () => {
     ];
 
     const menuLinks = [
-        // SỬ DỤNG ĐƯỜNG DẪN BẮT ĐẦU BẰNG / (ví dụ: /home) thay vì # (ví dụ: #home)
-        // nếu bạn đang điều hướng giữa các trang/route chính
-        { name: "Home", href: "../Home/Home.jsx" },
-        { name: "Service", href: "../Services/service.jsx" },
-        { name: "Rooms", href: "../Rooms/.gitkeep" },
-        { name: "Gallery", href: "../Gallerys/.gitkeep" },
-        { name: "Blog", href: "../Blog/Blog.jsx" },
-        { name: "Contact Us", href: "../Contactus/.gitkeep" },
-        { name: "Login", href: "../Login/.gitkeep" }
+    { name: "Home", href: "/" },
+    { name: "Service", href: "/services" },
+    { name: "Rooms", href: "/rooms" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Blog", href: "/blogs" },
+    { name: "Contact Us", href: "/contact" },
+    { name: "Login", href: "/login" }
     ];
 
     const socialIcons = [

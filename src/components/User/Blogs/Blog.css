@@ -22,7 +22,7 @@
   background-image: url('../../../../assets/LE-GRENIER_13490-1.jpg'); /* ảnh nền */
   background-size: cover;
   background-position: center;
-  color: #fff; /* Màu chữ mặc định là trắng */
+  color: #ffffff; /* Màu chữ mặc định là trắng */
   overflow: hidden;
   font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
@@ -72,6 +72,11 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 480px;  /* hoặc tuỳ chỉnh */
+  padding-bottom: 20px;
 }
 
 .Blog-card:hover {
@@ -86,7 +91,12 @@
 }
 
 .Blog-content {
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;     
+}
+.Blog-content p.description {
+    flex-grow: 1; /* đẩy button xuống cuối */
 }
 
 .Blog-content h3 {
@@ -105,20 +115,30 @@
   line-height: 1.6;
   margin: 0;
 }
-.read-more-btn {
-    display: inline-block; /* Để có thể thiết lập padding và margin */
-    margin-top: 15px;
-    padding: 8px 15px;
-    background-color: #e04444; /* Màu đỏ nổi bật (tương tự màu subtitle) */
-    color: #fff;
-    text-decoration: none; /* Bỏ gạch chân */
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+.Blog-content button {
+    width: fit-content;      /* nút gọn theo nội dung */
+    align-self: center;      /* 👈 CĂN GIỮA */
+    margin-top: auto;         /* ĐẨY NÚT XUỐNG ĐÁY */
+    padding: 10px 18px;
+    background: #c51d0d;      /* màu đỏ của bạn */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight:300;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.read-more-btn:hover {
-    background-color: #c43838; /* Màu đậm hơn khi di chuột */
+.Blog-content button:hover {
+    background: #a58e5a;             /* đậm hơn khi hover */
+    transform: translateY(-2px);     /* nổi lên nhẹ */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.Blog-content button:active {
+    transform: translateY(0);        /* nhấn xuống */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 /* Responsive */
