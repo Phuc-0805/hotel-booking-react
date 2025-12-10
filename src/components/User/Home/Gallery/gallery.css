@@ -1,17 +1,13 @@
-/* ----------------------------------- */
-/* CSS cho Gallery Section */
-/* ----------------------------------- */
 
 #gallery-section {
     font-family: Arial, sans-serif;
     padding: 0;
-    background-color: #ffffff; /* Đảm bảo nền trắng */
+    background-color: #ffffff;
 }
 
 /* Kiểu cho phần tiêu đề */
 .gallery-header {
     text-align: center;
-    /* Padding đã được điều chỉnh để không có gạch chân */
     padding: 40px 20px 20px; 
 }
 
@@ -36,11 +32,10 @@
 
 /* Kiểu cho từng mục ảnh */
 .gallery-item {
-    /* 4 ảnh trên một hàng (25% mỗi ảnh) trừ đi lề (20px) */
     width: calc(25% - 20px); 
     margin: 10px; /* Khoảng cách giữa các ảnh */
-    box-sizing: border-box; /* Đảm bảo padding/border không làm tăng kích thước tổng thể */
-    overflow: hidden; /* Ẩn bất cứ thứ gì tràn ra ngoài, quan trọng cho hiệu ứng zoom */
+    box-sizing: border-box;
+    overflow: hidden; /* Ẩn bất cứ thứ gì tràn ra ngoài */
     border-radius: 4px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
@@ -65,20 +60,20 @@
 /* Màn hình nhỏ hơn 1024px (ví dụ: máy tính bảng) */
 @media (max-width: 1024px) {
     .gallery-item {
-        width: calc(33.333% - 20px); /* 3 ảnh trên một hàng */
+        width: calc(33.333% - 20px);
     }
 }
 
 /* Màn hình nhỏ hơn 768px (ví dụ: máy tính bảng dọc) */
 @media (max-width: 768px) {
     .gallery-item {
-        width: calc(50% - 20px); /* 2 ảnh trên một hàng */
+        width: calc(50% - 20px);
     }
 }
 
 /* Màn hình nhỏ hơn 480px (ví dụ: điện thoại) */
 @media (max-width: 480px) {
     .gallery-item {
-        width: calc(100% - 20px); /* 1 ảnh trên một hàng */
+        width: calc(100% - 20px);
     }
 }

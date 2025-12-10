@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/User/Home/Home.jsx";
 import Blog from "./components/User/Blogs/Blog.jsx";
-
+import ContactUs from "./components/User/Contactus/Contactus.jsx";
 import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
 import Restaurant from "./components/User/Blogs/information/Restaurant/restaurant.jsx";
-
+import Gallery from "./components/User/gallerys/gallerys.jsx";
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -30,6 +30,8 @@ function App() {
           path="/blogs" 
           element={<Blog openModal={openModal} />} 
         />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/gallerys" element={<Gallery />} />
       </Routes>
 
       {/* ---- MODAL SWITCH ---- */}
