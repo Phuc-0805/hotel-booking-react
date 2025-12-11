@@ -1,0 +1,20 @@
+.welcome-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  max-width: 1100px;
+  margin: 0;          /* QUAN TRỌNG: tránh margin-top lớn */
+}
+
+/* h1, p */
+.welcome-section h1 {
+  margin: 0 0 12px 0;  /* đảm bảo bắt đầu ở trên cùng của container */
+  color: var(--text-color);
+  font-size: 2.2rem;
+}
+.welcome-section p {
+  margin: 0;
+  color: #555;
+  font-size: 1.05rem;
+}
