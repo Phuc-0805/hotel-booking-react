@@ -8,6 +8,9 @@ import Contactus from "./components/User/Contactus/contact.jsx";
 import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
 import Restaurant from "./components/User/Blogs/information/Restaurant/restaurant.jsx";
 import HotelLobby from "./components/User/Blogs/information/HotelLobby/hotellobby.jsx";
+import Services from "./components/User/Blogs/information/Service/service.jsx"
+import Event from "./components/User/Blogs/information/Event/event.jsx";
+import History from "./components/User/Blogs/information/History/History.jsx"
 
 import Gallery from "./components/User/Gallerys/gallerys.jsx";
 import ROOM from "./components/User/Rooms/rooms.jsx";
@@ -25,6 +28,11 @@ function App() {
     setModalContent(null);
   };
 
+
+
+
+
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -38,6 +46,15 @@ function App() {
         <Route path="/gallerys" element={<Gallery />} />
         <Route path="/rooms" element={<ROOM />} />
       </Routes>
+
+
+
+
+
+
+
+
+
 
       {/* ---- MODAL SWITCH ---- */}
       {modalContent?.type === "BedRoom" && (
@@ -57,6 +74,27 @@ function App() {
       )}
       {modalContent?.type === "HotelLobby" && (
         <HotelLobby
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      )}
+      {modalContent?.type ==="Services"&&(
+        <Services
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      )}
+      {modalContent?.type ==="Events"&&(
+        <Event
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          content={modalContent}
+        />
+      )}
+      {modalContent?.type ==="History"&&(
+        <History
           isOpen={isModalOpen}
           onClose={closeModal}
           content={modalContent}
