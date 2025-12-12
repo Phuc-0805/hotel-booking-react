@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Admin from "./components/Admin/Home/Trangchu.jsx";
 import ManageRoom from "./components/Admin/Manageroom/Quanlyphong.jsx"
+import Login from "./components/User/auth/Login.jsx";
+import Register from "./components/User/auth/Register.jsx";
 import img1 from "./assets/phong1.jpg"
 import img2 from "./assets/phong2.jpg"
 
@@ -58,6 +60,9 @@ function App() {
         {/* User Routes */}
         <Route path="/" element={<Home />} />
 
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} /> 
+
         <Route path="/blogs" element={<Blog openModal={openModal} />} />
         <Route path="/contactus" element={<Contactus />} />
         <Route path="/gallerys" element={<Gallery />} />
@@ -66,7 +71,8 @@ function App() {
         <Route path="/rooms" element={<ROOM rooms={rooms} />} />
 
         {/* Admin: quản lý phòng */}
-        <Route path="/login" element={<Admin/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/trangchu" element={<Admin/>} />
         <Route path="/managerooms" element={<ManageRoom rooms={rooms} setRooms={setRooms}/>}/>
       </Routes>
