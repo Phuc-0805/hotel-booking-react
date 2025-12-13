@@ -63,9 +63,28 @@
   padding: 10px 20px;
   background: #ff6a6a;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
+  margin-right:10px ;
+}
+.QLP-btnsua {
+  padding: 10px 20px;
+  background: #0472f9;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  margin-right:10px ;
+}
+.QLP-btnxoa {
+  padding: 10px 20px;
+  background: #fe0d0d;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  margin-right:10px ;
 }
 
 .QLP-btn:hover {

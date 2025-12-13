@@ -1,39 +1,64 @@
-import React from "react";
+import React from 'react';
+
 import "../pop.css";
+const Modal = ({ isOpen, onClose, content }) => {
 
-function Restaurant({ isOpen, onClose, content }) {
+    if (!isOpen) return null;
 
-  if (!isOpen || content?.type !== "Restaurant") return null;
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                {/* Nút đóng */}
+                
 
-        <img src={content.imageSrc} alt="" className="modal-image" />
+                {/* Title */}
+                <h2 className="modal-title">{content.title}</h2>
 
-        <h2 className="modal-title">{content.title}</h2>
+                {/* Optional Image */}
+                {content.imageSrc && (
+                    <img
+                        src={content.imageSrc}
+                        alt={content.title}
+                        className="modal-image"
+                    />
+                )}
 
-        <div className="modal-body">
-            <p>
-                Tại khách sạn của chúng tôi, ẩm thực không chỉ là bữa ăn, mà là một hành trình khám phá vị giác đầy tinh tế và đáng nhớ.
-                Chúng tôi tự hào giới thiệu một bức tranh ẩm thực đa sắc màu, từ những món ăn truyền thống đậm đà bản sắc cho đến tinh
-                hoa quốc tế được chế biến bởi đội ngũ đầu bếp tài năng.
+                {/* Nội dung mô tả — chuyển từ markdown sang HTML thủ công */}
+                <div className="modal-body">
 
-                <br /><br />
+                    <p className="modal-heading">👑 Nơi Nghỉ Dưỡng Thượng Lưu</p>
 
-                Mỗi không gian ẩm thực, từ nhà hàng cao cấp phục vụ các bữa tối sang trọng, đến quán bar thư giãn với cocktail sáng tạo,
-                đều mang đến một trải nghiệm độc đáo. Chúng tôi luôn ưu tiên sử dụng nguyên liệu tươi ngon, chất lượng hàng đầu, được chọn
-                lọc kỹ lưỡng, đảm bảo sự hài lòng tuyệt đối cho mọi thực khách. Hãy để chúng tôi đánh thức mọi giác quan của bạn qua từng
-                hương vị, trong không gian lịch thiệp và dịch vụ chăm sóc tận tâm.
-            </p>
+                    <p>
+                        Bước vào phòng, quý khách sẽ cảm nhận ngay sự giao thoa hoàn hảo
+                        giữa nét cổ điển thanh lịch và tiện nghi hiện đại. 
+                        <strong> Nội thất </strong>
+                        được chế tác từ gỗ óc chó tự nhiên, kết hợp cùng các chi tiết mạ đồng tinh tế,
+                        tạo nên không gian ấm cúng và sang trọng. Chiếc giường King-size phủ lớp
+                        chăn ga gối đệm lụa Ai Cập cao cấp hứa hẹn mang lại giấc ngủ sâu và thư thái tuyệt đối.
+                    </p>
+
+                    <p>
+                        <strong> Không gian </strong>
+                        của phòng rộng rãi, được tối ưu hóa để tận dụng tối đa ánh sáng tự nhiên.
+                        Mùi hương dịu nhẹ của tinh dầu hoa oải hương lan tỏa khắp phòng, 
+                        cùng với hệ thống chiếu sáng thông minh điều chỉnh theo tâm trạng.
+                    </p>
+
+                    <p>
+                        Đặc biệt, <strong> khung cảnh bên ngoài </strong> là điểm nhấn không thể quên.
+                        Từ ban công riêng, quý khách có thể chiêm ngưỡng toàn cảnh biển xanh biếc.
+                        Khung cửa sổ cao từ sàn đến trần tạo nên bức tranh sống động thay đổi theo ánh sáng.
+                    </p>
+
+                </div>
+                <button className="modal-close-btn" onClick={onClose}>
+                    Đóng
+                </button>
+            </div>
         </div>
+    );
+};
 
-        <button className="modal-close-btn" onClick={onClose}>
-            Đóng
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default Restaurant;
+export default Modal;

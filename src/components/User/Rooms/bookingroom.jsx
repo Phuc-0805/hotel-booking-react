@@ -1,0 +1,74 @@
+import React, { useState } from "react";
+import "./bookingroom.css"
+
+export default function BookingForm({ roomId, userEmail, onClose, onBookingSuccess }) {
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [totalGuests, setTotalGuests] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const handleBooking = async () => {
+    if (!checkInDate || !checkOutDate || totalGuests < 1) {
+      alert("Vui lòng nhập đầy đủ thông tin đặt phòng");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(`http://localhost:9192/bookings/room/${roomId}/booking`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          guestEmail: userEmail,
+          guestFullName: userEmail, // hoặc nhập thêm tên
+          checkInDate,
+          checkOutDate,
+          totalNumberOfGuest: totalGuests
+        })
+      });
+
+      const data = await res.text();
+
+      if (!res.ok) {
+        throw new Error(data || "Đặt phòng thất bại");
+      }
+
+      alert(`✅ ${data}`);
+      onBookingSuccess(); // gọi để reload booking nếu cần
+      onClose(); // đóng form
+    } catch (err) {
+      console.error("Lỗi booking:", err);
+      alert("❌ Lỗi khi đặt phòng, xem console");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="booking-overlay">
+      <div className="booking-form">
+        <h3>Đặt phòng</h3>
+        <p>Phòng ID: {roomId}</p>
+
+        <label>Ngày nhận phòng:</label>
+        <input type="date" value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)} />
+
+        <label>Ngày trả phòng:</label>
+        <input type="date" value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)} />
+
+        <label>Số khách:</label>
+        <input type="number" min="1" value={totalGuests} onChange={(e) => setTotalGuests(Number(e.target.value))} />
+
+        <div className="form-actions">
+          <button onClick={handleBooking} disabled={loading}>
+            {loading ? "Đang đặt..." : "Xác nhận đặt"}
+          </button>
+          <button onClick={onClose} disabled={loading}>Hủy</button>
+        </div>
+      </div>
+    </div>
+  );
+}

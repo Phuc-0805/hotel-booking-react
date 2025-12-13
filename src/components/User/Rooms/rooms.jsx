@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./rooms.css";
 import Header from "../Header/header.jsx";
 import Footer from "../footer/footer.jsx";
+import BookingForm from "./bookingroom.jsx";
 
-export default function Rooms({ rooms }) {
+export default function Rooms({ rooms, userEmail }) {
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
+
   return (
     <>
       <Header />
@@ -13,30 +16,32 @@ export default function Rooms({ rooms }) {
       </div>
 
       <section id="rooms2-section">
-
         <div className="rooms2-container">
 
-          {rooms.length > 0 ? (
+          {rooms && rooms.length > 0 ? (
             rooms.map((room) => (
               <div key={room.id} className="room2-card">
 
-                {/* Ảnh phòng */}
                 <div className="room2-image">
-                  <img src={room.image} alt={room.type} />
+                  <img
+                    src={
+                      room.photo
+                        ? `data:image/jpeg;base64,${room.photo}`
+                        : "/no-image.png"
+                    }
+                    alt={room.roomType}
+                  />
                 </div>
 
-                {/* Nội dung phòng */}
                 <div className="room2-content">
-                  <h3>{room.type}</h3>
-                  <p className="type">{room.roomCategory}</p>
+                  <h3>{room.roomType}</h3>
                   <p className="price">
-                    Giá: {room.price.toLocaleString()} VND / đêm
+                    Giá: {Number(room.roomPrice).toLocaleString()} VND / đêm
                   </p>
 
-                  {/* Nút đặt ngay */}
-                  <button 
+                  <button
                     className="book-btn"
-                    onClick={() => {}}
+                    onClick={() => setSelectedRoomId(room.id)}
                   >
                     Đặt ngay
                   </button>
@@ -50,6 +55,16 @@ export default function Rooms({ rooms }) {
 
         </div>
       </section>
+
+      {selectedRoomId && (
+        <BookingForm
+          roomId={selectedRoomId}
+          userEmail={userEmail}
+          onClose={() => setSelectedRoomId(null)}
+          onBookingSuccess={() => console.log("Booking thành công")}
+        />
+      )}
+
       <Footer />
     </>
   );

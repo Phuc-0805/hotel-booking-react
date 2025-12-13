@@ -13,7 +13,7 @@ export default function Homebar() {
         <nav className="headerbar-mucluc">
           <NavLink to="/trangchu" className="header-item">Trang chủ</NavLink>
           <NavLink to="/managerooms" className="header-item">Quản lý phòng</NavLink>
-          <NavLink to="/Bookingrooom" className="header-item">Quản lý đặt phòng</NavLink>
+          <NavLink to="/Bookingroom" className="header-item">Quản lý đặt phòng</NavLink>
           <NavLink to="/customers" className="header-item">Quản lý khách hàng</NavLink>
           <NavLink to="/contactus" className="header-item">Cài đặt</NavLink>
         </nav>
