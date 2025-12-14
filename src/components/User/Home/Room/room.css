@@ -44,6 +44,7 @@
     object-fit: cover;
 }
 
+
 .room-card img:hover {
     transform: scale(1.1);
     transition: 0.3s;
@@ -71,3 +72,5 @@
 .book-now-btn:hover {
   background-color: #ff5722;
 }
+
+

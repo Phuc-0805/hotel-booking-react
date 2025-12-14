@@ -48,11 +48,7 @@ export default function Trangchu() {
         body: formData
       });
 
-      const text = await response.text();
-      console.log("ADD STATUS:", response.status);
-      console.log("ADD RESPONSE:", text);
-
-      if (!response.ok) throw new Error(text || "Thêm phòng thất bại");
+      if (!response.ok) throw new Error("Thêm phòng thất bại");
 
       alert("✅ Thêm phòng thành công!");
       setShowAddForm(false);
@@ -60,7 +56,7 @@ export default function Trangchu() {
       loadRooms();
     } catch (error) {
       console.error("Lỗi thêm phòng:", error);
-      alert("❌ Lỗi khi thêm phòng. Xem console!");
+      alert("❌ Lỗi khi thêm phòng");
     }
   };
 
@@ -69,9 +65,10 @@ export default function Trangchu() {
     if (!window.confirm("Bạn có chắc muốn xóa phòng này?")) return;
 
     try {
-      const response = await fetch(`http://localhost:9192/rooms/delete/room/${roomId}`, {
-        method: "DELETE"
-      });
+      const response = await fetch(
+        `http://localhost:9192/rooms/delete/room/${roomId}`,
+        { method: "DELETE" }
+      );
 
       if (!response.ok) throw new Error("Xóa phòng thất bại");
 
@@ -79,7 +76,7 @@ export default function Trangchu() {
       loadRooms();
     } catch (error) {
       console.error("Lỗi xóa phòng:", error);
-      alert("❌ Lỗi khi xóa phòng. Xem console!");
+      alert("❌ Lỗi khi xóa phòng");
     }
   };
 
@@ -90,9 +87,7 @@ export default function Trangchu() {
     const formData = new FormData();
     formData.append("roomType", editingRoom.roomType.trim());
     formData.append("roomPrice", editingRoom.roomPrice.toString());
-    if (editingRoom.photo) {
-      formData.append("photo", editingRoom.photo);
-    }
+    if (editingRoom.photo) formData.append("photo", editingRoom.photo);
 
     try {
       const res = await fetch(
@@ -100,18 +95,14 @@ export default function Trangchu() {
         { method: "PUT", body: formData }
       );
 
-      const text = await res.text();
-      console.log("UPDATE STATUS:", res.status);
-      console.log("UPDATE RESPONSE:", text);
-
-      if (!res.ok) throw new Error(text || "Cập nhật thất bại");
+      if (!res.ok) throw new Error("Cập nhật thất bại");
 
       alert("✅ Cập nhật phòng thành công!");
       setEditingRoom(null);
       loadRooms();
     } catch (error) {
       console.error("Lỗi update phòng:", error);
-      alert("❌ Lỗi khi cập nhật phòng. Xem console!");
+      alert("❌ Lỗi khi cập nhật phòng");
     }
   };
 
@@ -122,21 +113,21 @@ export default function Trangchu() {
 
       <div className="page-content">
         <div className="QLP-section">
-          <div className="QLP-header">
+          <div className="QLP-header-3">
             <h1>Quản lý phòng</h1>
-            <button className="QLP-btn" onClick={() => setShowAddForm(true)}>
+            <button className="QLP-btn-3" onClick={() => setShowAddForm(true)}>
               + Thêm phòng
             </button>
           </div>
 
           {/* ===== FORM ADD ROOM ===== */}
           {showAddForm && (
-            <div className="room-form">
+            <div className="room-form-3">
               <h3>Thêm phòng mới</h3>
 
               <input
                 type="text"
-                placeholder="Loại phòng (Single, Double...)"
+                placeholder="Loại phòng"
                 value={newRoom.roomType}
                 onChange={(e) =>
                   setNewRoom({ ...newRoom, roomType: e.target.value })
@@ -160,56 +151,11 @@ export default function Trangchu() {
                 }
               />
 
-              <div className="form-actions">
-                <button className="QLP-btnsua" onClick={handleAddRoom}>
+              <div className="QLPform-actions">
+                <button className="QLP-btnsua-3" onClick={handleAddRoom}>
                   Lưu
                 </button>
-                <button className="QLP-btnxoa" onClick={() => setShowAddForm(false)}>
-                  Hủy
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* ===== FORM UPDATE ROOM ===== */}
-          {editingRoom && (
-            <div className="room-form">
-              <h3>Cập nhật phòng</h3>
-
-              <input
-                type="text"
-                placeholder="Loại phòng"
-                value={editingRoom.roomType}
-                onChange={(e) =>
-                  setEditingRoom({ ...editingRoom, roomType: e.target.value })
-                }
-              />
-
-              <input
-                type="number"
-                placeholder="Giá phòng"
-                value={editingRoom.roomPrice}
-                onChange={(e) =>
-                  setEditingRoom({ ...editingRoom, roomPrice: e.target.value })
-                }
-              />
-
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) =>
-                  setEditingRoom({ ...editingRoom, photo: e.target.files[0] })
-                }
-              />
-
-              <div className="form-actions">
-                <button className="save-btn" onClick={handleUpdateRoom}>
-                  Lưu
-                </button>
-                <button
-                  className="cancel-btn"
-                  onClick={() => setEditingRoom(null)}
-                >
+                <button className="QLP-btnxoa-3" onClick={() => setShowAddForm(false)}>
                   Hủy
                 </button>
               </div>
@@ -218,25 +164,40 @@ export default function Trangchu() {
 
           {/* ===== ROOM LIST ===== */}
           <h2 style={{ marginTop: "30px" }}>Danh sách phòng</h2>
-          <div className="room-list">
+
+          <div className="room-list-3">
             {rooms.length > 0 ? (
               rooms.map((room) => (
-                <div className="room-card" key={room.id}>
+                <div className="room-card-3" key={room.id}>
                   <img
+                    className="room-img-3"
                     src={
                       room.photo
                         ? `data:image/jpeg;base64,${room.photo}`
                         : "/no-image.png"
                     }
                     alt={room.roomType}
-                    className="room-img"
                   />
-                  <div className="room-info">
+
+                  <div className="room-info-3">
                     <h3>{room.roomType}</h3>
-                    <p className="price">{Number(room.roomPrice).toLocaleString()} đ</p>
+                    <p className="price-3">
+                      {Number(room.roomPrice).toLocaleString()} đ
+                    </p>
+
                     <div className="room-actions">
-                      <button className="QLP-btnsua" onClick={() => setEditingRoom(room) }>Sửa</button>
-                      <button className="QLP-btnxoa"onClick={() => handleDeleteRoom(room.id)}>Xóa</button>
+                      <button
+                        className="QLP-btnsua-3"
+                        onClick={() => setEditingRoom(room)}
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        className="QLP-btnxoa-3"
+                        onClick={() => handleDeleteRoom(room.id)}
+                      >
+                        Xóa
+                      </button>
                     </div>
                   </div>
                 </div>
