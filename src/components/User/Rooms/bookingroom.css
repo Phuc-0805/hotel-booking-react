@@ -96,3 +96,32 @@
 .booking-form button:last-child:hover {
   background-color: #c82333;
 }
+.services {
+  display: flex;           /* các item nằm ngang */
+  flex-wrap: wrap;         /* xuống dòng nếu quá dài */
+  flex-direction: column;
+  gap: 15px;
+}
+
+.service-item {
+  display: flex;           /* checkbox + text nằm ngang */
+  flex-direction: row;     /* mặc định row */
+  align-items: center;     /* căn giữa checkbox và text */
+  gap: 10px;
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;     /* tránh text xuống dòng */
+}
+
+.service-item input {
+  margin: 0;
+}
+.service-item input[type="checkbox"] {
+  width: 16px;     /* hoặc 18px, 20px tùy font */
+  height: 16px;
+  margin: 5px;       /* bỏ margin mặc định */
+  padding: 0;      /* bỏ padding nếu có */
+  vertical-align: middle; /* căn giữa theo text */
+}
