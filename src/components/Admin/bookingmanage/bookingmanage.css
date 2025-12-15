@@ -134,7 +134,7 @@ html, body, #root {
 .booking-manager th,
 .booking-manager td {
   padding: 8px 12px;
-  text-align: center;
+  text-align: center;   
   border: 1px solid #9ecdff;
 }
 
