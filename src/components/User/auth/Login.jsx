@@ -42,7 +42,7 @@ function Login() {
               className="auth-input"
               type="email"
               value={email}
-              placeholder="vd: admin@gmail.com"
+              placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -54,7 +54,7 @@ function Login() {
               className="auth-input"
               type="password"
               value={password}
-              placeholder="Ít nhất 6 ký tự"
+              placeholder="Mật khẩu"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
