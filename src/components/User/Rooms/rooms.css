@@ -141,3 +141,68 @@
   background-color: #ff5a5a;
   transform: translateY(-2px);
 }
+/* rooms.css */
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap; /* Responsive: xuống dòng khi màn hình nhỏ */
+  gap: 10px; /* Khoảng cách giữa các input/button */
+  margin: 20px auto;
+  max-width: 800px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar input[type="date"],
+.search-bar input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  flex: 1 1 150px; /* Mỗi input chiếm ít nhất 150px, co giãn */
+  min-width: 120px;
+  transition: border-color 0.3s;
+}
+
+.search-bar input[type="date"]:focus,
+.search-bar input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex: 0 0 auto; /* Button không giãn */
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+.search-bar button:nth-child(4) {
+  background-color: #6c757d; /* Màu khác cho button "Tất cả phòng" */
+}
+
+.search-bar button:nth-child(4):hover {
+  background-color: #5a6268;
+}
+
+/* Responsive: khi màn hình nhỏ, input/button full-width */
+@media (max-width: 600px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-bar input,
+  .search-bar button {
+    width: 100%;
+  }
+}

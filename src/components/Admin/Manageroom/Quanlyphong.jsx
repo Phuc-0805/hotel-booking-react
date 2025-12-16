@@ -75,7 +75,7 @@ export default function Trangchu() {
       alert("✅ Xóa phòng thành công!");
       loadRooms();
     } catch (error) {
-      console.error("Lỗi xóa phòng:", error);
+      console.error("Lỗi khi xóa phòng:", error);
       alert("❌ Lỗi khi xóa phòng");
     }
   };
@@ -84,10 +84,19 @@ export default function Trangchu() {
   const handleUpdateRoom = async () => {
     if (!editingRoom) return;
 
+    if (!editingRoom.roomType || !editingRoom.roomPrice) {
+      alert("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("roomType", editingRoom.roomType.trim());
     formData.append("roomPrice", editingRoom.roomPrice.toString());
-    if (editingRoom.photo) formData.append("photo", editingRoom.photo);
+
+    // Chỉ gửi file mới
+    if (editingRoom.photo instanceof File) {
+      formData.append("photo", editingRoom.photo);
+    }
 
     try {
       const res = await fetch(
@@ -156,6 +165,47 @@ export default function Trangchu() {
                   Lưu
                 </button>
                 <button className="QLP-btnxoa-3" onClick={() => setShowAddForm(false)}>
+                  Hủy
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ===== FORM EDIT ROOM ===== */}
+          {editingRoom && (
+            <div className="room-form-3">
+              <h3>Sửa phòng</h3>
+
+              <input
+                type="text"
+                value={editingRoom.roomType}
+                onChange={(e) =>
+                  setEditingRoom({ ...editingRoom, roomType: e.target.value })
+                }
+              />
+              <input
+                type="number"
+                value={editingRoom.roomPrice}
+                onChange={(e) =>
+                  setEditingRoom({ ...editingRoom, roomPrice: e.target.value })
+                }
+              />
+
+              {/* Ảnh hiện tại */}
+
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) =>
+                  setEditingRoom({ ...editingRoom, photo: e.target.files[0] })
+                }
+              />
+
+              <div className="QLPform-actions">
+                <button className="QLP-btnsua-3" onClick={handleUpdateRoom}>
+                  Lưu
+                </button>
+                <button className="QLP-btnxoa-3" onClick={() => setEditingRoom(null)}>
                   Hủy
                 </button>
               </div>
