@@ -1,79 +1,102 @@
-
 #gallery-section {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding: 0;
     background-color: #ffffff;
+    width: 100%;
 }
 
-/* Kiểu cho phần tiêu đề */
+/* --- HEADER SECTION --- */
 .gallery-header {
+    background-color: #0F172B;
     text-align: center;
-    padding: 40px 20px 20px; 
+    padding: 60px 20px;
+    margin-bottom: 50px;
+    width: 100%;
 }
 
 .gallery-header h2 {
-    font-size: 2.7em;
-    font-weight: bold;
-    color: #333;
-    letter-spacing: 2px;
-    display: inline-block;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     margin: 0;
 }
 
-/* Kiểu cho bố cục gallery */
+/* --- GRID LAYOUT --- */
 .gallery-container {
-    max-width: 1200px; /* Chiều rộng tối đa của container */
-    margin: 0 auto; /* Căn giữa container */
-    padding: 0 15px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px 80px;
     display: flex;
-    flex-wrap: wrap; /* Cho phép các mục xuống dòng */
-    justify-content: center; /* Căn giữa các mục ảnh */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
 }
 
-/* Kiểu cho từng mục ảnh */
+/* --- GALLERY ITEM --- */
 .gallery-item {
-    width: calc(25% - 20px); 
-    margin: 10px; /* Khoảng cách giữa các ảnh */
+    /* Tính toán lại width khi dùng gap (Senior tip: dùng flex-basis hoặc calc trừ đi gap) */
+    width: calc(25% - 24px); 
+    margin: 0;
     box-sizing: border-box;
-    overflow: hidden; /* Ẩn bất cứ thứ gì tràn ra ngoài */
-    border-radius: 4px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+    cursor: pointer;
 }
 
 .gallery-item img {
     width: 100%;
-    height: 200px; /* Chiều cao cố định cho tất cả ảnh */
-    object-fit: cover; /* Cắt ảnh để vừa với kích thước */
+    height: 260px;
+    object-fit: cover;
     display: block;
-    transition: transform 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Hiệu ứng phóng to khi di chuột */
+/* --- HOVER EFFECTS --- */
 .gallery-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.1);
+}
+
+
+.gallery-item:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease;
 }
 
 /* ----------------------------------- */
-/* Responsive Design (Thiết kế đáp ứng) */
+/* RESPONSIVE DESIGN */
 /* ----------------------------------- */
 
-/* Màn hình nhỏ hơn 1024px (ví dụ: máy tính bảng) */
 @media (max-width: 1024px) {
     .gallery-item {
-        width: calc(33.333% - 20px);
+        width: calc(33.333% - 24px);
     }
 }
 
-/* Màn hình nhỏ hơn 768px (ví dụ: máy tính bảng dọc) */
 @media (max-width: 768px) {
+    .gallery-container {
+        padding: 0 15px 40px;
+        gap: 16px;
+    }
+    
     .gallery-item {
-        width: calc(50% - 20px);
+        width: calc(50% - 16px);
+    }
+    
+    .gallery-header {
+        padding: 40px 20px;
+    }
+    
+    .gallery-header h2 {
+        font-size: 2em;
     }
 }
 
-/* Màn hình nhỏ hơn 480px (ví dụ: điện thoại) */
 @media (max-width: 480px) {
     .gallery-item {
-        width: calc(100% - 20px);
+        width: 100%;
     }
 }

@@ -4,17 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 /* ===== ADMIN ===== */
 import Admin from "./components/Admin/Home/Trangchu.jsx";
 import ManageRoom from "./components/Admin/Manageroom/Quanlyphong.jsx";
-import Bookingmanage from "./components/Admin/bookingmanage/bookingmanage.jsx"
+import Bookingmanage from "./components/Admin/bookingmanage/bookingmanage.jsx";
 
 /* ===== USER ===== */
 import Home from "./components/User/Home/Home.jsx";
 import Blog from "./components/User/Blogs/Blog.jsx";
-<<<<<<< HEAD
-import ContactUs from "./components/User/Contactus/Contactus.jsx";
-import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
-import Restaurant from "./components/User/Blogs/information/Restaurant/restaurant.jsx";
-import Gallery from "./components/User/gallerys/gallerys.jsx";
-=======
 import Contactus from "./components/User/Contactus/contact.jsx";
 import Login from "./components/User/Login/login.jsx";
 import Signin from "./components/User/Sign-in/Sign-in.jsx";
@@ -28,10 +22,13 @@ import HotelLobby from "./components/User/Blogs/information/HotelLobby/hotellobb
 import Services from "./components/User/Blogs/information/Service/service.jsx";
 import Event from "./components/User/Blogs/information/Event/event.jsx";
 import History from "./components/User/Blogs/information/History/History.jsx";
-
->>>>>>> origin/main
+import Breakfast from "./components/User/Blogs/information/Breakfast/Breakfast.jsx";
+import AirportPickup from "./components/User/Blogs/information/Airport pickup/Airport_pickup.jsx";
+import ExtraBed from "./components/User/Blogs/information/ExtraBed/ExtraBed.jsx";
+import SwimmingPool from "./components/User/Blogs/information/Swimming Pool/SwimmingPool.jsx";
+import Massage from "./components/User/Blogs/information/Massage/Massage.jsx";
+import Amenities from "./components/User/Blogs/information/Amenities/Amenities.jsx";
 function App() {
-
   /* ===== MODAL STATE ===== */
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -92,12 +89,7 @@ function App() {
             />
           }
         />
-<<<<<<< HEAD
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/gallerys" element={<Gallery />} />
-=======
-        <Route path="/Bookingroom" element ={<Bookingmanage/>} />
->>>>>>> origin/main
+        <Route path="/Bookingroom" element={<Bookingmanage />} />
       </Routes>
 
       {/* ===== MODALS ===== */}
@@ -123,6 +115,24 @@ function App() {
 
       {modalContent?.type === "History" && (
         <History isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      )}
+      {modalContent?.type === "Breakfast" && (
+        <Breakfast isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      )}
+      {modalContent?.type === "AirportPickup" && (
+        <AirportPickup isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      )}
+      {modalContent?.type === "ExtraBed" && (
+        <ExtraBed isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      )}
+      {modalContent?.type === "SwimmingPool" && (
+        <SwimmingPool isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      )}
+      {modalContent?.type === "Massage" && (
+        <Massage isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      )}
+      {modalContent?.type === "Amenities" && (
+        <Amenities isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
       )}
     </BrowserRouter>
   );

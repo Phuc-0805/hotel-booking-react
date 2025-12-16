@@ -1,123 +1,86 @@
-<<<<<<< HEAD
+/* gallerys.css */
 
+/* Reset cơ bản để tránh lề thừa */
+* {
+    box-sizing: border-box;
+}
 
 .gallery-wrapper {
-=======
-.gallery2-wrapper {
->>>>>>> origin/main
-  width: 100%;
-  font-family: sans-serif;
-  background-color: #fff;
+    background-color: #fff; /* Nền trắng như mẫu */
+    width: 100%;
 }
 
-/* 1. Banner Đen Tiêu đề */
-<<<<<<< HEAD
+/* Phần Banner (Tuỳ chỉnh theo ý mày, tao để cơ bản) */
 .gallery-banner {
-  background-color: #0c1018;
-  padding: 60px 0;
-=======
-.gallery2-banner {
-  background-color: #0c1018;
-  padding: 15px 0;
->>>>>>> origin/main
-  text-align: center;
-  color: white;
-  margin-bottom: 50px;
+    background-color: #333; /* Ví dụ màu tối */
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 50px; /* Cách phần ảnh ra một chút */
 }
 
-<<<<<<< HEAD
 .gallery-banner h2 {
-=======
-.gallery2-banner h2 {
->>>>>>> origin/main
-  font-size: 38px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0;
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-/* 2. Container căn giữa */
-<<<<<<< HEAD
+/* Container giới hạn chiều rộng để nội dung vào giữa */
 .gallery-container {
-=======
-.gallery2-container {
->>>>>>> origin/main
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 15px;
-  box-sizing: border-box;
+    max-width: 1200px; /* Độ rộng chuẩn web */
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-/* 3. Lưới ảnh (Grid System)*/
-<<<<<<< HEAD
+/* Lưới ảnh - KHU VỰC QUAN TRỌNG NHẤT */
 .gallery-grid {
-=======
-.gallery2-grid {
->>>>>>> origin/main
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 30px; 
-  margin-bottom: 80px;
+    display: grid;
+    /* Chia 4 cột bằng nhau y hệt ảnh mẫu */
+    grid-template-columns: repeat(4, 1fr); 
+    /* Khoảng cách giữa các ảnh (ngang và dọc) */
+    gap: 30px; 
+    margin-bottom: 80px; /* Cách footer ra */
 }
 
-/* Style cho từng ảnh */
-<<<<<<< HEAD
 .gallery-item {
-  width: 100%;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    /* Đặt chiều cao cố định để hàng lối thẳng tắp */
+    height: 250px; 
+    overflow: hidden; /* Để làm hiệu ứng zoom nếu thích */
+    background-color: #f0f0f0; /* Màu nền chờ ảnh load */
 }
 
 .gallery-img {
-=======
-.gallery2-item {
-  width: 100%;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  box-sizing: border-box; /* quan trọng */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cực quan trọng: Cắt ảnh vừa khung mà không méo */
+    display: block;
+    transition: transform 0.4s ease; /* Hiệu ứng mượt */
 }
 
-.gallery2-img {
->>>>>>> origin/main
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
+/* Hiệu ứng hover nhẹ (option thêm cho đẹp) */
+.gallery-item:hover .gallery-img {
+    transform: scale(1.1);
 }
 
-<<<<<<< HEAD
-.gallery-img:hover {
-=======
-.gallery2-img:hover {
->>>>>>> origin/main
-  transform: scale(1.05);
-}
+/* --- RESPONSIVE (Co giãn trên mobile/tablet) --- */
 
-/* Responsive: Điều chỉnh cho màn hình nhỏ */
-<<<<<<< HEAD
-
+/* Màn hình Tablet (Dưới 992px) -> Chuyển thành 2 cột */
 @media (max-width: 992px) {
-  .gallery-grid {
-=======
-@media (max-width: 992px) {
-  .gallery2-grid {
->>>>>>> origin/main
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .gallery-item {
+        height: 300px; /* Tăng chiều cao lên chút vì ảnh ít đi */
+    }
 }
 
-/* Mobile (Màn hình điện thoại)*/
+/* Màn hình Mobile (Dưới 576px) -> Chuyển thành 1 cột */
 @media (max-width: 576px) {
-<<<<<<< HEAD
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
 }
-=======
-  .gallery2-grid {
-    grid-template-columns: 1fr;
-  }
-}
->>>>>>> origin/main
