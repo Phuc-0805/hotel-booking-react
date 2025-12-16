@@ -1,0 +1,168 @@
+/* Overlay nền mờ */
+.booking-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* mờ đen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Form chính */
+.booking-form {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px 25px;
+  width: 350px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: popIn 0.3s ease;
+}
+
+/* Hiệu ứng pop-in */
+@keyframes popIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Tiêu đề form */
+.booking-form h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Label + input */
+.booking-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+}
+
+.booking-form input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Nút xác nhận/hủy */
+.booking-form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.booking-form button {
+  flex: 1;
+  padding: 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.booking-form button:first-child {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.booking-form button:first-child:hover {
+  background-color: #218838;
+}
+
+.booking-form button:last-child {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.booking-form button:last-child:hover {
+  background-color: #c82333;
+}
+.services {
+  display: flex;           /* các item nằm ngang */
+  flex-wrap: wrap;         /* xuống dòng nếu quá dài */
+  flex-direction: column;
+  gap: 15px;
+}
+
+.service-item {
+  display: flex;           /* checkbox + text nằm ngang */
+  flex-direction: row;     /* mặc định row */
+  align-items: center;     /* căn giữa checkbox và text */
+  gap: 10px;
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;     /* tránh text xuống dòng */
+}
+
+.service-item input {
+  margin: 0;
+}
+.service-item input[type="checkbox"] {
+  width: 16px;     /* hoặc 18px, 20px tùy font */
+  height: 16px;
+  margin: 5px;       /* bỏ margin mặc định */
+  padding: 0;      /* bỏ padding nếu có */
+  vertical-align: middle; /* căn giữa theo text */
+}
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100; /* cao hơn form */
+}
+
+.confirm-popup {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  width: 350px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.confirm-popup h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+}
+
+.confirm-popup p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.confirm-popup strong {
+  color: #000;
+}

@@ -1,0 +1,48 @@
+/* Container trong sidebar (dùng để chia phần top/bottom) */
+.headerbar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Dashboard small box */
+.header-dashboard-container {
+  flex: 0 0 auto;  /* chiều cao theo nội dung */
+  padding: 18px;
+  background-color: #f8efef;
+  margin: 0;       /* tránh margin gây khoảng cách */
+}
+
+/* Mục lục menu */
+.headerbar-mucluc {
+  flex: 1 1 auto;   /* chiếm phần còn lại */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 20px; /* padding thay vì margin-top */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Item */
+.header-item {
+  display: block;
+  padding: 10px 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.05rem;
+  border-radius: 6px;
+  transition: transform .15s ease, color .15s ease, background .15s ease;
+  margin-left: 0;        /* bỏ margin-left gây lệch */
+}
+
+/* Hover và active */
+.header-item:hover {
+  color: red;
+  transform: translateX(6px);
+  cursor: pointer;
+}
+.header-item.active {
+  color: red;
+  font-weight: 600;
+}
