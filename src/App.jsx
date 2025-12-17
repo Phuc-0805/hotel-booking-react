@@ -14,6 +14,7 @@ import Login from "./components/User/Login/login.jsx";
 import Signin from "./components/User/Sign-in/Sign-in.jsx";
 import Gallery from "./components/User/Gallerys/gallerys.jsx";
 import ROOM from "./components/User/Rooms/rooms.jsx";
+import ServicePage from "./components/User/Services/servicespage.jsx";
 
 /* ===== MODAL CONTENT ===== */
 import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
@@ -28,6 +29,7 @@ import ExtraBed from "./components/User/Blogs/information/ExtraBed/ExtraBed.jsx"
 import SwimmingPool from "./components/User/Blogs/information/Swimming Pool/SwimmingPool.jsx";
 import Massage from "./components/User/Blogs/information/Massage/Massage.jsx";
 import Amenities from "./components/User/Blogs/information/Amenities/Amenities.jsx";
+
 function App() {
   /* ===== MODAL STATE ===== */
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,6 +92,7 @@ function App() {
           }
         />
         <Route path="/Bookingroom" element={<Bookingmanage />} />
+        <Route path="/services" element={<ServicePage />} />
       </Routes>
 
       {/* ===== MODALS ===== */}
