@@ -6,23 +6,52 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    // DEMO LOGIN (chưa có backend)
-    if (email === "admin@gmail.com" && password === "123456") {
-      localStorage.setItem("user", JSON.stringify({ email, role: "admin" }));
-      navigate("/trangchu");
-    } else {
-      setError("Sai email hoặc mật khẩu demo (admin@gmail.com / 123456)");
+    try {
+      const res = await fetch("http://localhost:9192/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Email hoặc mật khẩu không đúng");
+        return;
+      }
+
+      const auth = {
+        token: data.token || data.accessToken,
+        email: data.email,
+        roles: data.roles || [],
+        id: data.id,
+      };
+
+      localStorage.setItem("auth", JSON.stringify(auth));
+
+      if (auth.roles.includes("ROLE_ADMIN")) {
+        navigate("/trangchu");
+      } else {
+        navigate("/");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Không thể kết nối tới server");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleForgotPassword = () => {
-    // DEMO – sau này bạn có thể điều hướng sang /forgot-password
-    alert("Tính năng quên mật khẩu hiện đang là DEMO, vui lòng liên hệ quản trị viên.");
+    alert("Tính năng quên mật khẩu đang được phát triển.");
   };
 
   return (
@@ -33,7 +62,9 @@ function Login() {
           Truy cập hệ thống quản lý đặt phòng khách sạn.
         </p>
 
-        {error && <div className="auth-alert auth-alert--error">{error}</div>}
+        {error && (
+          <div className="auth-alert auth-alert--error">{error}</div>
+        )}
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="auth-field">
@@ -70,10 +101,12 @@ function Login() {
             </button>
           </div>
 
-          <button type="submit" className="auth-btn auth-btn--primary">
-              <Link to="/trangchu" className="auth-link">
-                Đăng nhập
-              </Link>
+          <button
+            type="submit"
+            className="auth-btn auth-btn--primary"
+            disabled={loading}
+          >
+            {loading ? "Đang đăng nhập..." : "Đăng nhập"}
           </button>
         </form>
 

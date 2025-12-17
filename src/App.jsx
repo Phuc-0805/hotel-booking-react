@@ -4,7 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 /* ===== ADMIN ===== */
 import Admin from "./components/Admin/Home/Trangchu.jsx";
 import ManageRoom from "./components/Admin/Manageroom/Quanlyphong.jsx";
-import Bookingmanage from "./components/Admin/bookingmanage/bookingmanage.jsx"
+import Bookingmanage from "./components/Admin/bookingmanage/bookingmanage.jsx";
+import AdminRoute from "./components/Auth/AdminRoute";
+import PrivateRoute from "./components/Auth/PrivateRoute";
 
 /* ===== USER ===== */
 import Home from "./components/User/Home/Home.jsx";
@@ -74,18 +76,20 @@ function App() {
         <Route path="/register" element={<Signin />} />
 
         {/* ===== ADMIN ===== */}
-        <Route path="/trangchu" element={<Admin />} />
+        <Route path="/trangchu" element={<AdminRoute><Admin /></AdminRoute>} />
         <Route
           path="/managerooms"
           element={
-            <ManageRoom
-              rooms={rooms}
-              setRooms={setRooms}
-              reloadRooms={loadRooms}
-            />
+            <AdminRoute>
+              <ManageRoom
+                rooms={rooms}
+                setRooms={setRooms}
+                reloadRooms={loadRooms}
+              />
+            </AdminRoute>
           }
         />
-        <Route path="/Bookingroom" element ={<Bookingmanage/>} />
+        <Route path="/Bookingroom" element={<AdminRoute><Bookingmanage/></AdminRoute>} />
       </Routes>
 
       {/* ===== MODALS ===== */}
