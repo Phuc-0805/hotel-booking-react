@@ -44,7 +44,7 @@ html, body, #root {
   background: white;
   padding: 30px;
   border-radius: 12px;
-  max-width: 900px;
+  max-width: 1000px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-bottom: 30px;
 }

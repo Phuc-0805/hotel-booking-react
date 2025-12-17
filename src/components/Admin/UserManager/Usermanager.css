@@ -1,0 +1,177 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body, #root {
+  min-height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+}
+
+/* ================= LAYOUT CHÍNH ================= */
+.customer-admin-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ================= NỘI DUNG ================= */
+.customer-page-content {
+  flex: 1;
+  padding: 20px 40px;
+}
+
+/* ================= SECTION ================= */
+.customer-section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.customer-section h1 {
+  margin-bottom: 12px;
+  font-size: 2rem;
+  color: #1d1d1d;
+}
+
+.customer-section p {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 1rem;
+}
+
+/* ================= NÚT ================= */
+.customer-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.customer-btn-add {
+  background-color: #4caf50;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.customer-btn-add:hover {
+  background-color: #45a049;
+}
+
+.customer-btn-edit {
+  background-color: #2196f3;
+}
+
+.customer-btn-edit:hover {
+  background-color: #1976d2;
+}
+
+.customer-btn-delete {
+  background-color: #f44336;
+}
+
+.customer-btn-delete:hover {
+  background-color: #e53935;
+}
+
+/* ================= FORM ================= */
+.customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fdfdfd;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 600px;
+}
+
+.customer-form input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.customer-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ================= BẢNG KHÁCH HÀNG ================= */
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.customer-table th,
+.customer-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.customer-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.customer-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.customer-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.customer-table button {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.customer-table button.customer-edit {
+  background-color: #2196f3;
+}
+
+.customer-table button.customer-edit:hover {
+  background-color: #1976d2;
+}
+
+.customer-table button.customer-delete {
+  background-color: #f44336;
+}
+
+.customer-table button.customer-delete:hover {
+  background-color: #e53935;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .customer-section {
+    padding: 20px;
+  }
+
+  .customer-table th, .customer-table td {
+    padding: 8px;
+  }
+
+  .customer-btn, .customer-form input {
+    font-size: 0.9rem;
+  }
+}

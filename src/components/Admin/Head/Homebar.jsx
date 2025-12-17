@@ -15,7 +15,7 @@ export default function Homebar() {
           <NavLink to="/managerooms" className="header-item">Quản lý phòng</NavLink>
           <NavLink to="/Bookingroom" className="header-item">Quản lý đặt phòng</NavLink>
           <NavLink to="/customers" className="header-item">Quản lý khách hàng</NavLink>
-          <NavLink to="/contactus" className="header-item">Cài đặt</NavLink>
+          <NavLink to="/" className="header-item">Thoát</NavLink>
         </nav>
       </div>
     </aside>

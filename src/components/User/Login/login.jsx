@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { setAuth as saveAuth, getAuth as getStoredAuth } from '../../../utils/auth';
 import "../auth/auth.css";
 
-function Login() {
+function Login({ setAuth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/";
+  const preRoomId = location.state?.roomId || null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,20 +33,35 @@ function Login() {
         return;
       }
 
-      const auth = {
-        token: data.token || data.accessToken,
-        email: data.email,
-        roles: data.roles || [],
+      // Chuẩn hóa dữ liệu nhận được
+      const authData = {
+        token: data.token, // server trả về token string
+        email: data.email || data.username,
+        roles: (data.roles || []).map(r => r.toUpperCase()),
         id: data.id,
       };
 
-      localStorage.setItem("auth", JSON.stringify(auth));
+      console.log("authData trước khi lưu:", authData);
 
-      if (auth.roles.includes("ROLE_ADMIN")) {
-        navigate("/trangchu");
-      } else {
-        navigate("/");
+      if (!authData.token) {
+        setError("Server không trả về token hợp lệ");
+        return;
       }
+
+      // Lưu vào localStorage
+      saveAuth(authData);
+
+      const stored = getStoredAuth();
+      console.log("localStorage sau khi lưu:", stored);
+
+      // Cập nhật state App
+      setAuth(stored);
+
+      // Redirect theo role
+      const isAdmin = (stored.roles || []).some(r => r === 'ROLE_ADMIN' || r === 'ADMIN');
+      if (isAdmin) navigate('/trangchu');
+      else navigate(from, { state: { roomId: preRoomId } });
+
     } catch (err) {
       console.error(err);
       setError("Không thể kết nối tới server");
@@ -50,71 +70,28 @@ function Login() {
     }
   };
 
-  const handleForgotPassword = () => {
-    alert("Tính năng quên mật khẩu đang được phát triển.");
-  };
-
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
-        <h1 className="auth-title">Đăng nhập</h1>
-        <p className="auth-subtitle">
-          Truy cập hệ thống quản lý đặt phòng khách sạn.
-        </p>
+        <h1>Đăng nhập</h1>
+        {error && <div className="auth-alert auth-alert--error">{error}</div>}
 
-        {error && (
-          <div className="auth-alert auth-alert--error">{error}</div>
-        )}
-
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form onSubmit={handleSubmit}>
           <div className="auth-field">
-            <label className="auth-label">Email</label>
-            <input
-              className="auth-input"
-              type="email"
-              value={email}
-              placeholder="vd: admin@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <label>Email</label>
+            <input type="email" className="auth-input" value={email} onChange={e => setEmail(e.target.value)} required />
           </div>
-
           <div className="auth-field">
-            <label className="auth-label">Mật khẩu</label>
-            <input
-              className="auth-input"
-              type="password"
-              value={password}
-              placeholder="Ít nhất 6 ký tự"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <label>Mật khẩu</label>
+            <input type="password" className="auth-input" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
-
-          <div className="auth-extra-row">
-            <button
-              type="button"
-              className="auth-link-button"
-              onClick={handleForgotPassword}
-            >
-              Quên mật khẩu?
-            </button>
-          </div>
-
-          <button
-            type="submit"
-            className="auth-btn auth-btn--primary"
-            disabled={loading}
-          >
+          <button type="submit" disabled={loading} className="auth-btn auth-btn--primary">
             {loading ? "Đang đăng nhập..." : "Đăng nhập"}
           </button>
         </form>
 
         <p className="auth-switch">
-          Chưa có tài khoản?{" "}
-          <Link to="/register" className="auth-link">
-            Đăng ký ngay
-          </Link>
+          Chưa có tài khoản? <Link to="/register" className="auth-link">Đăng ký ngay</Link>
         </p>
 
         <p className="auth-back-home">

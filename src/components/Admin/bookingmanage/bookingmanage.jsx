@@ -54,7 +54,7 @@ export default function BookingManager() {
     <div className="admin-layout">
       <Head />
       <div className="page-content">
-        <div className="booking-manager QLP-section">
+        <div className="booking-manager">
           <h1>Quản lý Booking</h1>
 
           {bookings.length > 0 ? (
