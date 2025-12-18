@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./bookingroom.css";
 
-// Danh sách service (có giá tạm thời, có thể lấy từ backend)
+// Danh sách service
 const SERVICE_TYPES = [
   { name: "Airport Pickup", value: "AIRPORT_PICKUP", price: 100000, rule: "FIXED" },
   { name: "Extra Bed", value: "EXTRA_BED", price: 200000, rule: "PER_NIGHT" },
   { name: "Breakfast", value: "BREAKFAST", price: 50000, rule: "PER_PERSON_PER_NIGHT" },
 ];
 
-export default function BookingForm({ room, userEmail, onClose, onBookingSuccess }) {
+export default function BookingForm({ room, auth, onClose, onBookingSuccess }) {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [totalGuests, setTotalGuests] = useState(1);
@@ -18,6 +18,9 @@ export default function BookingForm({ room, userEmail, onClose, onBookingSuccess
   const [estimatedTotal, setEstimatedTotal] = useState(0);
 
   const roomPrice = Number(room.roomPrice) || 0;
+  
+  // Lấy email trực tiếp từ prop auth để đảm bảo tính đồng bộ
+  const userEmail = auth?.email;
 
   const formatVND = (value) =>
     new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(value);
@@ -34,12 +37,13 @@ export default function BookingForm({ room, userEmail, onClose, onBookingSuccess
   const calculateNights = () => {
     if (!checkInDate || !checkOutDate) return 0;
     const diff = new Date(checkOutDate) - new Date(checkInDate);
-    return Math.max(Math.ceil(diff / (1000 * 60 * 60 * 24)), 0);
+    const nights = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    return nights > 0 ? nights : 0;
   };
 
   const calculateTotal = () => {
     const nights = calculateNights();
-    if (!roomPrice || nights === 0) return 0;
+    if (nights === 0) return 0;
 
     let total = roomPrice * nights;
 
@@ -61,51 +65,49 @@ export default function BookingForm({ room, userEmail, onClose, onBookingSuccess
           break;
       }
     });
-
     return total;
   };
 
   const handlePreConfirm = () => {
-    // Use latest auth from localStorage if prop not provided
-    const auth = (() => {
-      try { return JSON.parse(localStorage.getItem("auth")); } catch(e) { return null; }
-    })();
-    const effectiveEmail = userEmail || auth?.email;
-
-    if (!effectiveEmail) {
-      alert("Bạn cần đăng nhập để đặt phòng");
+    // Kiểm tra trạng thái đăng nhập từ auth prop
+    if (!auth || !auth.token) {
+      alert("Hết phiên đăng nhập. Vui lòng đăng nhập lại.");
+      window.location.href = "/login";
       return;
     }
+    
     if (!checkInDate || !checkOutDate || totalGuests < 1) {
       alert("Vui lòng nhập đầy đủ thông tin đặt phòng");
       return;
     }
+
+    if (calculateNights() <= 0) {
+      alert("Ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày");
+      return;
+    }
+
     setEstimatedTotal(calculateTotal());
     setShowConfirmPopup(true);
   };
 
   const handleBooking = async () => {
-    if (!userEmail) {
-      alert("Bạn cần đăng nhập để đặt phòng");
-      return;
-    }
-
     setLoading(true);
     try {
-      const auth = (() => {
-        try { return JSON.parse(localStorage.getItem("auth")); } catch(e) { return null; }
-      })();
-
-      const headers = { "Content-Type": "application/json" };
-      if (auth?.token) headers["Authorization"] = `Bearer ${auth.token}`;
+      const headers = { 
+        "Content-Type": "application/json" 
+      };
+      
+      // Đính kèm Token từ auth prop
+      if (auth?.token) {
+        headers["Authorization"] = `Bearer ${auth.token}`;
+      }
 
       const res = await fetch(`http://localhost:9192/bookings/room/${room.id}/booking`, {
         method: "POST",
         headers,
         body: JSON.stringify({
-          // server will set email from authenticated principal; keep fields for compatibility
           guestEmail: userEmail,
-          guestFullName: userEmail,
+          guestFullName: userEmail, // Sử dụng email làm tên nếu không có trường name
           checkInDate,
           checkOutDate,
           totalNumberOfGuest: totalGuests,
@@ -113,27 +115,23 @@ export default function BookingForm({ room, userEmail, onClose, onBookingSuccess
         }),
       });
 
-      const text = await res.text();
-
+      // Xử lý lỗi 401 Unauthorized ngay lập tức
       if (res.status === 401) {
-        alert("Bạn cần đăng nhập để đặt phòng. Vui lòng đăng nhập lại.");
+        alert("Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.");
         window.location.href = "/login";
         return;
       }
 
-      if (res.status === 429) {
-        alert(text || "Too many requests. Try later.");
-        return;
-      }
+      const message = await res.text();
 
-      if (!res.ok) throw new Error(text || "Đặt phòng thất bại");
+      if (!res.ok) throw new Error(message || "Đặt phòng thất bại");
 
-      alert(`✅ ${text}`);
+      alert(`✅ ${message}`);
       onBookingSuccess();
       onClose();
     } catch (err) {
       console.error("Lỗi booking:", err);
-      alert("❌ Lỗi khi đặt phòng, xem console");
+      alert(err.message || "Lỗi khi kết nối đến máy chủ");
     } finally {
       setLoading(false);
       setShowConfirmPopup(false);
@@ -143,26 +141,32 @@ export default function BookingForm({ room, userEmail, onClose, onBookingSuccess
   return (
     <div className="booking-overlay">
       <div className="booking-form">
+        <button className="close-btn-top" onClick={onClose}>&times;</button>
         <h3>Đặt phòng: {room.roomType}</h3>
-        <p>Phòng ID: {room.id}</p>
-        <p>Giá phòng: {formatVND(roomPrice)} / đêm</p>
+        <p className="room-info">Giá phòng: <strong>{formatVND(roomPrice)}</strong> / đêm</p>
 
-        <label>Ngày nhận phòng:</label>
-        <input type="date" value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)} />
+        <div className="input-group">
+          <label>Ngày nhận phòng:</label>
+          <input type="date" value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)} />
+        </div>
 
-        <label>Ngày trả phòng:</label>
-        <input type="date" value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)} />
+        <div className="input-group">
+          <label>Ngày trả phòng:</label>
+          <input type="date" value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)} />
+        </div>
 
-        <label>Số khách:</label>
-        <input
-          type="number"
-          min="1"
-          value={totalGuests}
-          onChange={(e) => setTotalGuests(Number(e.target.value))}
-        />
+        <div className="input-group">
+          <label>Số khách:</label>
+          <input
+            type="number"
+            min="1"
+            value={totalGuests}
+            onChange={(e) => setTotalGuests(Number(e.target.value))}
+          />
+        </div>
 
-        <label>Dịch vụ bổ sung:</label>
-        <div className="services">
+        <label className="service-label">Dịch vụ bổ sung:</label>
+        <div className="services-list">
           {SERVICE_TYPES.map((service) => (
             <label key={service.value} className="service-item">
               <input
@@ -171,60 +175,44 @@ export default function BookingForm({ room, userEmail, onClose, onBookingSuccess
                 checked={selectedServices.includes(service.value)}
                 onChange={handleServiceChange}
               />
-              <span className="service-name">{service.name}</span>
+              <span>{service.name} ({formatVND(service.price)})</span>
             </label>
           ))}
         </div>
 
         <div className="form-actions">
-          <button onClick={handlePreConfirm}>Xác nhận đặt</button>
-          <button onClick={onClose}>Hủy</button>
+          <button className="confirm-btn" onClick={handlePreConfirm}>Xác nhận đặt</button>
+          <button className="cancel-btn" onClick={onClose}>Hủy</button>
         </div>
       </div>
 
       {showConfirmPopup && (
         <div className="confirm-overlay">
           <div className="confirm-popup">
-            <h3>Xác nhận thông tin đặt phòng</h3>
-            <p>Ngày nhận phòng: {checkInDate}</p>
-            <p>Ngày trả phòng: {checkOutDate}</p>
-            <p>Số khách: {totalGuests}</p>
-
-            <p><strong>Chi tiết dịch vụ:</strong></p>
-            <p>Giá phòng: {formatVND(roomPrice * calculateNights())}</p>
-            {selectedServices.length > 0
-              ? selectedServices.map((s) => {
-                  const service = SERVICE_TYPES.find((item) => item.value === s);
-                  let serviceTotal = 0;
-                  switch (service.rule) {
-                    case "FIXED":
-                      serviceTotal = service.price;
-                      break;
-                    case "PER_NIGHT":
-                      serviceTotal = service.price * calculateNights();
-                      break;
-                    case "PER_PERSON_PER_NIGHT":
-                      serviceTotal = service.price * totalGuests * calculateNights();
-                      break;
-                    default:
-                      break;
-                  }
-                  return (
-                    <p key={s}>
-                      {service.name}: {formatVND(serviceTotal)}
-                    </p>
-                  );
-                })
-              : <p>Không có dịch vụ bổ sung</p>}
-
-            <p><strong>Tổng tiền dự kiến: {formatVND(estimatedTotal)}</strong></p>
+            <h3>Chi tiết đặt phòng</h3>
+            <div className="confirm-details">
+              <p>Ngày: {checkInDate} → {checkOutDate} ({calculateNights()} đêm)</p>
+              <p>Khách: {totalGuests}</p>
+              <hr />
+              <p>Tiền phòng: {formatVND(roomPrice * calculateNights())}</p>
+              {selectedServices.map((s) => {
+                const service = SERVICE_TYPES.find((item) => item.value === s);
+                let sTotal = 0;
+                if (service.rule === "FIXED") sTotal = service.price;
+                else if (service.rule === "PER_NIGHT") sTotal = service.price * calculateNights();
+                else if (service.rule === "PER_PERSON_PER_NIGHT") sTotal = service.price * totalGuests * calculateNights();
+                
+                return <p key={s}>{service.name}: {formatVND(sTotal)}</p>;
+              })}
+              <p className="final-total"><strong>Tổng tiền dự kiến: {formatVND(estimatedTotal)}</strong></p>
+            </div>
 
             <div className="form-actions">
-              <button onClick={handleBooking} disabled={loading}>
-                {loading ? "Đang đặt..." : "Xác nhận đặt"}
+              <button className="final-confirm-btn" onClick={handleBooking} disabled={loading}>
+                {loading ? "Đang xử lý..." : "Xác nhận & Đặt"}
               </button>
-              <button onClick={() => setShowConfirmPopup(false)} disabled={loading}>
-                Hủy
+              <button className="back-btn" onClick={() => setShowConfirmPopup(false)} disabled={loading}>
+                Quay lại
               </button>
             </div>
           </div>
