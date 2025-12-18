@@ -5,7 +5,8 @@ import Footer from "../footer/footer.jsx";
 import BookingForm from "./bookingroom.jsx";
 import "./rooms.css";
 
-export default function Rooms({ rooms, userEmail, auth }) {
+// Nhận props rooms, auth, onLogout từ App.jsx
+export default function Rooms({ rooms, auth, onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,8 +16,8 @@ export default function Rooms({ rooms, userEmail, auth }) {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
 
-  // Email hiện tại dựa vào state App
-  const currentUserEmail = auth?.email || userEmail || null;
+  // Email hiện tại dựa vào state auth từ App truyền xuống
+  const currentUserEmail = auth?.email || null;
 
   useEffect(() => {
     setDisplayRooms(rooms);
@@ -27,7 +28,8 @@ export default function Rooms({ rooms, userEmail, auth }) {
     const roomIdFromState = location.state?.roomId;
     if (roomIdFromState) {
       setSelectedRoomId(roomIdFromState);
-      navigate(location.pathname, { replace: true }); // xóa state.roomId
+      // Xóa state để tránh mở lại form khi refresh trang
+      navigate(location.pathname, { replace: true, state: {} }); 
     }
   }, [location.state, navigate, location.pathname]);
 
@@ -46,7 +48,7 @@ export default function Rooms({ rooms, userEmail, auth }) {
       const data = await res.json();
       setDisplayRooms(data);
     } catch (err) {
-      console.error(err);
+      console.error("Lỗi tìm kiếm:", err);
     }
   };
 
@@ -59,12 +61,14 @@ export default function Rooms({ rooms, userEmail, auth }) {
 
   return (
     <>
-      <Header />
+      {/* Truyền auth và onLogout xuống Header để đồng bộ trạng thái */}
+      <Header auth={auth} onLogout={onLogout} />
 
       <div className="rooms2-header">
         <h2>Danh sách phòng</h2>
       </div>
 
+      {/* GIỮ NGUYÊN CẤU TRÚC THANH TÌM KIẾM CỦA BẠN */}
       <div className="search-bar">
         <input type="date" value={checkIn} onChange={e => setCheckIn(e.target.value)} />
         <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)} />
@@ -97,7 +101,7 @@ export default function Rooms({ rooms, userEmail, auth }) {
                   <button
                     className="book-btn"
                     onClick={() => {
-                      // Nếu chưa login → redirect login
+                      // Nếu chưa login → redirect login kèm theo roomId để quay lại tự mở form
                       if (!currentUserEmail) {
                         navigate("/login", {
                           state: { from: "/rooms", roomId: room.id },
@@ -125,8 +129,8 @@ export default function Rooms({ rooms, userEmail, auth }) {
           userEmail={currentUserEmail}
           onClose={() => setSelectedRoomId(null)}
           onBookingSuccess={() => {
-            console.log("Booking thành công");
-            setSelectedRoomId(null); // đóng form sau khi booking
+            alert("Đặt phòng thành công!");
+            setSelectedRoomId(null);
           }}
         />
       )}

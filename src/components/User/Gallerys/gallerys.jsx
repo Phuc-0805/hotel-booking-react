@@ -12,7 +12,8 @@ import gallery6 from '../../../assets/gallery6.jpg';
 import gallery7 from '../../../assets/gallery7.jpg';
 import gallery8 from '../../../assets/gallery8.jpg';
 
-const Gallery2 = () => {
+// Nhận props auth và onLogout từ App.jsx truyền xuống
+const Gallery2 = ({ auth, onLogout }) => {
   const images = [
     gallery1,
     gallery2,
@@ -26,15 +27,16 @@ const Gallery2 = () => {
 
   return (
     <>
-      <Header />
-        <div className="gallery2-banner">
-          <div className="gallery2-container">
-            <h2>GALLERY</h2>
-          </div>
+      {/* Truyền dữ liệu vào Header để đồng bộ giao diện người dùng */}
+      <Header auth={auth} onLogout={onLogout} />
+
+      <div className="gallery2-banner">
+        <div className="gallery2-container">
+          <h2>GALLERY</h2>
         </div>
+      </div>
 
       <div className="gallery2-wrapper">
-        {/* Lưới ảnh */}
         <div className="gallery2-container">
           <div className="gallery2-grid">
             {images.map((imgSrc, index) => (
@@ -48,7 +50,6 @@ const Gallery2 = () => {
             ))}
           </div>
         </div>
-
       </div>
 
       <Footer />

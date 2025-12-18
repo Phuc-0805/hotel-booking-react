@@ -1,17 +1,19 @@
 import "./header.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../assets/Logo.png";
-import { isAuthenticated, isAdmin, logout, getAuth } from "../../../utils/auth";
+import { checkIsAdmin } from "../../../utils/auth"; // Sử dụng hàm mới để check admin
 
-export default function Header() {
+export default function Header({ auth, onLogout }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    onLogout(); // Xóa state tại App.jsx
+    navigate("/"); // Chuyển về trang chủ
   };
 
-  const auth = getAuth();
+  // Logic kiểm tra dựa trên prop 'auth' để giao diện cập nhật ngay lập tức
+  const isUserAuthenticated = !!auth;
+  const isUserAdmin = checkIsAdmin(auth);
 
   return (
     <header className="header">
@@ -30,14 +32,23 @@ export default function Header() {
         <NavLink to="/rooms">Rooms</NavLink>
         <NavLink to="/blogs">Blog</NavLink>
         <NavLink to="/contactus">Contact Us</NavLink>
-        {!isAuthenticated() && <NavLink to="/login">Login</NavLink>}
-        {isAuthenticated() && isAdmin() && <NavLink to="/trangchu">Admin</NavLink>}
-        {isAuthenticated() && (
+        
+        {/* Giữ nguyên cấu trúc các câu lệnh điều kiện của bạn */}
+        {!isUserAuthenticated && (
+          <NavLink to="/login">Login</NavLink>
+        )}
+        
+        {isUserAdmin && (
+          <NavLink to="/trangchu">Admin</NavLink>
+        )}
+        
+        {isUserAuthenticated && (
           <button className="auth-link-button" onClick={handleLogout} style={{marginLeft: '8px'}}>
             Đăng xuất
           </button>
         )}
-        {isAuthenticated() && auth?.email && (
+        
+        {isUserAuthenticated && auth?.email && (
           <span className="header-user">{auth.email}</span>
         )}
       </nav>

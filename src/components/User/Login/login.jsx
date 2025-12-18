@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { setAuth as saveAuth, getAuth as getStoredAuth } from '../../../utils/auth';
+// Đổi isAdmin thành checkIsAdmin
+import { setAuth as saveAuth, checkIsAdmin } from '../../../utils/auth'; 
 import "../auth/auth.css";
 
 function Login({ setAuth }) {
@@ -33,38 +34,27 @@ function Login({ setAuth }) {
         return;
       }
 
-      // Chuẩn hóa dữ liệu nhận được
-      const authData = {
-        token: data.token, // server trả về token string
-        email: data.email || data.username,
-        roles: (data.roles || []).map(r => r.toUpperCase()),
-        id: data.id,
-      };
+      // 1. Chuẩn hóa dữ liệu và lưu vào localStorage thông qua hàm utils
+      const authData = saveAuth(data);
 
-      console.log("authData trước khi lưu:", authData);
-
-      if (!authData.token) {
-        setError("Server không trả về token hợp lệ");
+      if (!authData || !authData.token) {
+        setError("Lỗi: Không tìm thấy Token xác thực");
         return;
       }
 
-      // Lưu vào localStorage
-      saveAuth(authData);
+      // 2. Cập nhật State cho App ngay lập tức để Header đổi giao diện
+      setAuth(authData);
 
-      const stored = getStoredAuth();
-      console.log("localStorage sau khi lưu:", stored);
-
-      // Cập nhật state App
-      setAuth(stored);
-
-      // Redirect theo role
-      const isAdmin = (stored.roles || []).some(r => r === 'ROLE_ADMIN' || r === 'ADMIN');
-      if (isAdmin) navigate('/trangchu');
-      else navigate(from, { state: { roomId: preRoomId } });
+      // 3. Điều hướng dựa trên quyền hạn (Dùng hàm mới checkIsAdmin)
+      if (checkIsAdmin(authData)) {
+        navigate('/trangchu', { replace: true });
+      } else {
+        navigate(from, { state: { roomId: preRoomId }, replace: true });
+      }
 
     } catch (err) {
-      console.error(err);
-      setError("Không thể kết nối tới server");
+      console.error("Login Error:", err);
+      setError("Không thể kết nối tới máy chủ.");
     } finally {
       setLoading(false);
     }
@@ -75,7 +65,6 @@ function Login({ setAuth }) {
       <div className="auth-card">
         <h1>Đăng nhập</h1>
         {error && <div className="auth-alert auth-alert--error">{error}</div>}
-
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
             <label>Email</label>
@@ -86,17 +75,10 @@ function Login({ setAuth }) {
             <input type="password" className="auth-input" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           <button type="submit" disabled={loading} className="auth-btn auth-btn--primary">
-            {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+            {loading ? "Đang xác thực..." : "Đăng nhập"}
           </button>
         </form>
-
-        <p className="auth-switch">
-          Chưa có tài khoản? <Link to="/register" className="auth-link">Đăng ký ngay</Link>
-        </p>
-
-        <p className="auth-back-home">
-          <Link to="/">← Quay về trang chủ</Link>
-        </p>
+        <p className="auth-switch">Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link></p>
       </div>
     </div>
   );

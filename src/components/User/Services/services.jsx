@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Header from '../Header/header';
+import Header from '../Header/header.jsx';
 import Footer from '../footer/footer';
 import './services.css';
 
@@ -12,7 +12,9 @@ import gymImg from '../../../assets/gym.jpg';
 import waterParkImg from '../../../assets/congviennuoc.jpg'; 
 import santhethao from '../../../assets/santhethao.jpg';
 import barimg from '../../../assets/bar.jpg';
-const ServicePage = () => {
+
+// Nhận props auth và onLogout để đồng bộ trạng thái đăng nhập
+const ServicePage = ({ auth, onLogout }) => {
   
   // Motion: Scroll lên đầu trang khi load
   useEffect(() => {
@@ -75,7 +77,6 @@ const ServicePage = () => {
         <div key={item.id} className="service-card" style={{ animationDelay: `${index * 0.1}s` }}>
           <div className="card-image-box">
             <img src={item.img} alt={item.title} />
-            {/* Đã bỏ overlay và button Link */}
           </div>
           <div className="card-content">
             <h3>{item.title}</h3>
@@ -88,9 +89,9 @@ const ServicePage = () => {
 
   return (
     <div className="services-page-wrapper">
-      <Header />
+      {/* TRUYỀN PROPS VÀO ĐÂY ĐỂ HEADER CẬP NHẬT NGAY LẬP TỨC */}
+      <Header auth={auth} onLogout={onLogout} />
 
-      {}
       <div className="services-banner">
         <div className="services-container-banner">
           <h2>SERVICES</h2>

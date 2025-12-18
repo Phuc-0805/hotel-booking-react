@@ -10,7 +10,8 @@ import img4 from "../../../assets/message.jpg.webp";
 import img5 from "../../../assets/event.jpg";
 import img6 from "../../../assets/History.png";
 
-export default function Blog({ openModal }) {
+// Nhận thêm auth và onLogout từ App.jsx truyền xuống
+export default function Blog({ auth, onLogout, openModal }) {
 
     const blogPosts = [
         { id: 1, imageSrc: img1, title: "Bed Room", subtitle: "Trải Nghiệm đẳng cấp", description: "Nội thất hiện đại, sang trọng, tiện nghi, chất lượng. Luôn đem lại cho bạn trải nghiệm tốt nhất." },
@@ -21,12 +22,13 @@ export default function Blog({ openModal }) {
         { id: 6, imageSrc: img6, title: "History", subtitle: "Truyền thống lâu đời", description: "Khách sạn với lịch sử phát triển lâu đời, mang đậm giá trị văn hóa và truyền thống." }
     ].map(post => ({
         ...post,
-        type: post.title.replace(/\s+/g, "") // tạo type tự động, không dấu cách
+        type: post.title.replace(/\s+/g, "") 
     }));
 
     return (
         <>
-            <Header />
+            {/* TRUYỀN PROPS XUỐNG HEADER ĐỂ ĐỒNG BỘ GIAO DIỆN */}
+            <Header auth={auth} onLogout={onLogout} />
 
             <div className="Blog-header"> 
                 <h1>BLOG</h1> 
