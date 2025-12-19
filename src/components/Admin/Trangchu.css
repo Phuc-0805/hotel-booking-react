@@ -163,11 +163,14 @@ html, body, #root {
 /* ================= BOOKING ================= */
 .booking-manager {
   background: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 12px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin-top: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: block;      /* Đảm bảo div là block để tính toán chiều rộng */
+  overflow-x: auto;    /* Tự động hiện thanh cuộn ngang khi nội dung tràn */
+  white-space: nowrap; /* (Tùy chọn) Giữ nội dung trên 1 dòng */
 }
 
 .booking-manager table {

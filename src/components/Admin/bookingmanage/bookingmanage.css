@@ -1,13 +1,17 @@
-/* RESET + LAYOUT chính (giữ nguyên từ Trangchu.css) */
+/* RESET + LAYOUT chính */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html, body, #root {
   min-height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  /* THAY ĐỔI 1: Thiết lập cỡ chữ gốc nhỏ hơn (14px) */
+  font-size: 14px; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Thêm font cho đẹp hơn */
 }
 
 .admin-layout {
@@ -19,7 +23,7 @@ html, body, #root {
 }
 
 .headerbar {
-  width: 250px;
+  width: 240px; /* Giảm nhẹ chiều rộng sidebar */
   height: 100vh;
   background: var(--bg-color);
   border-right: 1px solid #ffeded;
@@ -34,7 +38,7 @@ html, body, #root {
   flex: 1;
   height: 100vh;
   overflow-y: auto;
-  padding: 30px;
+  padding: 20px; /* Giảm padding tổng thể từ 30px xuống 20px */
   background: #f5f5f5;
 }
 
@@ -42,28 +46,29 @@ html, body, #root {
 .QLP-section,
 .booking-manager {
   background: white;
-  padding: 30px;
+  padding: 20px; /* Giảm padding card */
   border-radius: 12px;
   max-width: 1000px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .QLP-section h1,
 .booking-manager h1 {
-  margin-bottom: 12px;
-  font-size: 2rem;
+  margin-bottom: 10px;
+  font-size: 1.6rem; /* THAY ĐỔI 2: Giảm từ 2rem xuống 1.6rem */
   color: #1d1d1d;
+  font-weight: 600;
 }
 
 /* NÚT chung */
 .QLP-btn,
 .booking-manager button {
-  padding: 10px 20px;
+  padding: 8px 16px; /* Giảm padding nút */
   background: #ff6666;
   border: none;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Giảm từ 1rem xuống 0.9rem */
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s;
@@ -77,8 +82,8 @@ html, body, #root {
 /* FORM BOOKING */
 .booking-form {
   background: #fff;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 15px; /* Giảm padding form */
+  margin-top: 15px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   max-width: 600px;
@@ -86,23 +91,26 @@ html, body, #root {
 
 .booking-form input {
   width: 100%;
-  padding: 8px 12px;
-  margin: 10px 0;
+  padding: 6px 10px; /* Giảm padding input */
+  margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 0.9rem; /* Chữ trong input nhỏ lại */
 }
 
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .save-btn {
   background: #4caf50;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 14px; /* Nút nhỏ gọn hơn */
+  font-size: 0.9rem;
   border-radius: 6px;
   cursor: pointer;
 }
@@ -115,7 +123,8 @@ html, body, #root {
   background: #f44336;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
   border-radius: 6px;
   cursor: pointer;
 }
@@ -124,22 +133,32 @@ html, body, #root {
   background: #e53935;
 }
 
-/* DANH SÁCH BOOKING */
+/* DANH SÁCH BOOKING (Bảng) */
 .booking-manager table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px;
+  font-size: 0.9rem; /* THAY ĐỔI 3: Chữ trong bảng nhỏ hơn */
 }
 
 .booking-manager th,
 .booking-manager td {
-  padding: 8px 12px;
+  padding: 6px 10px; /* Thu gọn ô bảng */
   text-align: center;   
   border: 1px solid #9ecdff;
 }
 
 .booking-manager th {
   background: #83d6ff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Nút trong bảng */
+.booking-manager td button {
+  padding: 4px 10px; /* Nút trong bảng nhỏ gọn hơn nữa */
+  font-size: 0.85rem;
+  margin: 0 2px;
 }
 
 .booking-manager td button.edit-btn {

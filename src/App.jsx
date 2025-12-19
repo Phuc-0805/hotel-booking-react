@@ -20,6 +20,7 @@ import Signin from "./components/User/Sign-in/Sign-in.jsx";
 import Gallery from "./components/User/Gallerys/gallerys.jsx";
 import Rooms from "./components/User/Rooms/rooms.jsx";
 import ServicePage from "./components/User/Services/services.jsx";
+import Profile from "./components/User/Header/profile.jsx";
 
 /* ===== MODAL COMPONENTS ===== */
 import BedRoom from "./components/User/Blogs/information/bedroom/bedroom.jsx";
@@ -106,7 +107,7 @@ function App() {
             />
           }
         />
-
+        <Route path="/profile" element={<Profile auth={auth} onLogout={handleLogout}/>}/>
         {/* ===== AUTH ROUTES ===== */}
         {/* Nếu đã login (auth != null) thì không cho vào trang Login nữa */}
         <Route

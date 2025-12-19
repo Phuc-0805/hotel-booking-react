@@ -6,11 +6,11 @@ import img2 from "../../../../assets/Copy-of-Deluxe-Twins.jpg";
 import img3 from "../../../../assets/Copy-of-Le317Bistro-07.202010091-HDR-1.jpg";
 
 const roomsData = [
-  { img: img1, title: "Bed Room" },
-  { img: img2, title: "Deluxe Room" },
+  { img: img1, title: "Single Room" },
+  { img: img2, title: "Double Room" },
   { img: img3, title: "Luxury Room" },
   { img: img1, title: "Family Room" },
-  { img: img2, title: "Twin Room" },
+  { img: img2, title: "Single Room" },
   { img: img3, title: "Suite Room" }
 ];
 

@@ -1,0 +1,56 @@
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.user-info-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 5px solid #007bff;
+  margin-bottom: 30px;
+}
+
+.booking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.booking-item:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.room-type {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.price {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  background: #28a745;
+  color: white;
+}
+
+.error-message {
+  color: red;
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+}
