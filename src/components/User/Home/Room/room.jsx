@@ -33,8 +33,8 @@ export default function Room({ auth }) {
       <div className="rooms-container">
         <div className="rooms-header">
           <h2>
-            OUR ROOM
-            <span></span>
+            Danh sách phòng 
+
           </h2>
           <p>Khám phá không gian nghỉ dưỡng sang trọng và tiện nghi bậc nhất.</p>
         </div>

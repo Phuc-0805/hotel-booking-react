@@ -24,7 +24,7 @@ const ContactUs = () => {
     return (
         <section id="contact-section">
             <div className="contact-header">
-                <h2>CONTACT US</h2>
+                <h2>LIÊN HỆ</h2>
             </div>
             
             <div className="contact-container">
@@ -75,7 +75,7 @@ const ContactUs = () => {
 
                         {/* Nút Gửi */}
                         <button type="submit" className="send-button">
-                            SEND
+                            Gửi
                         </button>
                     </form>
                 </div>

@@ -7,12 +7,12 @@ export default function AboutUs() {
     <div className="aboutus-section">
       <div className="aboutus-content">
         <h2>
-          ABOUT US <span></span>
+          THÔNG TIN KHÁCH SẠN <span></span>
         </h2>
         <p>
-          The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it's seen all around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum.
+          Khởi đầu từ một kiến trúc cổ điển đầy hoài niệm, khách sạn đã trải qua hành trình phát triển bền bỉ qua nhiều thập kỷ. Từ một điểm dừng chân khiêm tốn, nơi đây dần chuyển mình thành biểu tượng của sự sang trọng và tinh tế, chứng kiến bao thăng trầm của thời đại. Dù đã qua nhiều lần trùng tu để đáp ứng tiêu chuẩn tiện nghi hiện đại, khách sạn vẫn giữ trọn vẹn nét đẹp di sản cùng cam kết về lòng hiếu khách tận tâm, mang đến cho du khách cảm giác như đang bước vào một trang sử sống động và ấm áp.
         </p>
-        <button className="read-more-btn">Read More</button>
+        <button className="read-more-btn">ĐỌC THÊM</button>
       </div>
 
       <div className="aboutus-image">

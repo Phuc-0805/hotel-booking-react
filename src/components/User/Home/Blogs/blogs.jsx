@@ -11,21 +11,21 @@ const Blogs = () => {
         { 
             id: 1, 
             imageSrc: img1, // Thay bằng đường dẫn ảnh thật
-            title: "Bed Room", 
+            title: "Phòng Nghỉ", 
             subtitle: "Trải Nghiệm đẳng cấp", 
             description: "Nội thất hiện đại, sang trọng, tiện nghi, chất lượng. Luôn đem lại cho bạn trải nghiệm tốt nhất."
         },
         { 
             id: 2, 
             imageSrc: img2, // Thay bằng đường dẫn ảnh thật
-            title: "Restaurant", 
+            title: "Nhà Hàng", 
             subtitle: "Ẩm thực tinh tế", 
             description: "Nhà hàng với đa dạng món ăn từ Á đến Âu, phục vụ bởi đội ngũ đầu bếp chuyên nghiệp." 
         },
         { 
             id: 3, 
             imageSrc: img3, // Thay bằng đường dẫn ảnh thật
-            title: "Hotel Lobby", 
+            title: "Sảnh Đường", 
             subtitle: "Sảnh đón khách sang trọng", 
             description: "Sảnh khách sạn rộng rãi, thiết kế tinh tế,không khí ấm cúng, tạo ấn tượng đầu tiên khó quên cho khách hàng." 
         },

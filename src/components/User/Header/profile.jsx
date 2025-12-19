@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./profile.css";
 // Import Header và Footer của bạn
 import Header from "./header"; 
-import Footer from "../Footer/Footer"; 
+import Footer from "../footer/footer"; 
 
 export default function Profile({ auth, onLogout }) {
   const [bookings, setBookings] = useState([]);
